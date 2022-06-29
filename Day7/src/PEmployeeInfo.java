@@ -13,11 +13,11 @@ public class PEmployeeInfo {
 		
 	}
 	
-	public PEmployeeInfo(String en, String d, int s) { //전체
-		employeeNum = en;
-		department = d;
-		salary = s;
-	}
+//	public PEmployeeInfo(String en, String d, int s) { //전체
+//		employeeNum = en;
+//		department = d;
+//		salary = s;
+//	}
 	
 	//get추가함
 	public String getEmployeeNum() {
@@ -30,6 +30,26 @@ public class PEmployeeInfo {
 		return salary;
 	}
 	
+	public String getName() {
+		return person.getName();
+	}
+	public int getBirthday() {
+		return person.getBirthday();
+	}
+	public int getCall() {
+		return person.getCall();
+	}
+	public String getAddress() {
+		return person.getAddress();
+	}
+	public int getAccountNum() {
+		return person.getAccountNum();
+	}
+	public String getPassword() {
+		return person.getPassword();
+	}
+	
+	
 	
 	//set추가함
 	public void setEmployeeNum(String en) {
@@ -41,6 +61,26 @@ public class PEmployeeInfo {
 	public void setSalary(int s) {
 		this.salary = s;
 	}
+	
+	public void setName(String name) {
+		this.person.setName(name);
+	}
+	public void setBirthday(int birthday) {
+		this.person.setBirthday(birthday);
+	}
+	public void setCall(int call) {
+		this.person.setCall(call);
+	}
+	public void setAddress(int address) {
+		this.person.setCall(address);
+	}
+	public void setAccountNum(int accountnum) {
+		this.person.setCall(accountnum);
+	}
+	public void setPassword(String password) {
+		this.person.setPassword(password);
+	}
+	
 	
 	
 	public static void main(String[] args) {
