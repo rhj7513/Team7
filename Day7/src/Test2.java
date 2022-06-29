@@ -74,7 +74,7 @@ public class Test2 {
 					}
 					break;
 				case 2:
-					System.out.println("2. 사용자");
+					System.out.println("2. 사용자  ");
 					 String empnum;
 				      String empw;
 				      
