@@ -1,41 +1,43 @@
 
 public class SalaryOp {
 	private int insentive; //insentive
-	private int basicSalary; //ì…ë ¥ë°›ì€ ê°’
-	private int realSalary; //ì‹¤ê¸‰ì—¬
+	private int basicSalary; //ÀÔ·Â¹ŞÀº °ª
+	private int realSalary; //½Ç±Ş¿©
 
 	public int getSalaryOp() {
-		return realSalary; //ì‹¤ê¸‰ì—¬ ì¶œë ¥
+		return realSalary; //½Ç±Ş¿© Ãâ·Â
 	}
 	
-	public void setSalaryOp(int bs, String en, String po) { //ê¸‰ì—¬, ì‚¬ì›ë²ˆí˜¸, ì§ì±…
-		basicSalary = bs; //ê¸‰ì—¬
-		if(en.charAt(0)=='F') //ì‚¬ì›ë²ˆí˜¸ ì²«ë²ˆì§¸ ê¸€ìê°€ Fì¸ ê²½ìš°, ì •ê·œì§ ê¸‰ì—¬ ì ìš©
+	public void setSalaryOp(int bs, String en, String po) { //±Ş¿©, »ç¿ø¹øÈ£, Á÷Ã¥
+		basicSalary = bs; //±Ş¿©
+		if(en.charAt(0)=='F') //»ç¿ø¹øÈ£ Ã¹¹øÂ° ±ÛÀÚ°¡ FÀÎ °æ¿ì, Á¤±ÔÁ÷ ±Ş¿© Àû¿ë
 		{
-			realSalary = basicSalary; //ì‹¤ê¸‰ì—¬ì— ì €ì¥
+			realSalary = basicSalary; //½Ç±Ş¿©¿¡ ÀúÀå
 		}
-		else if(en.charAt(0)=='P') //ì‚¬ì›ë²ˆí˜¸ ì²«ë²ˆì§¸ ê¸€ìê°€ Pì¸ ê²½ìš°, ë¹„ì •ê·œì§ ê¸‰ì—¬ ì ìš©
+		else if(en.charAt(0)=='P') //»ç¿ø¹øÈ£ Ã¹¹øÂ° ±ÛÀÚ°¡ PÀÎ °æ¿ì, ºñÁ¤±ÔÁ÷ ±Ş¿© Àû¿ë
 		{
-			realSalary = (int)(basicSalary*0.8); //ì‹¤ê¸‰ì—¬ì— ì €ì¥
-		}
-		
-		if(po.equals("ì‚¬ì›")) //ì§ì±…ì´ ì‚¬ì›ì¸ ê²½ìš°
-		{
-			insentive = (int)(basicSalary*0.1); //insentive=ê¸‰ì—¬*0.1
-		}
-		else if(po.equals("íŒ€ì¥")) //ì§ì±…ì´ íŒ€ì¥ì¸ ê²½ìš°
-		{
-			insentive = (int)(basicSalary*0.3); //insentive=ê¸‰ì—¬*0.3
-		}
-		else if(po.equals("ê³¼ì¥")) //ì§ì±…ì´ ê³¼ì¥ì¸ ê²½ìš°
-		{
-			insentive = (int)(basicSalary*0.5); //insentive=ê¸‰ì—¬*0.5
-		}
-		else if(po.equals("ì‚¬ì¥")) //ì§ì±…ì´ ì‚¬ì¥ì¸ ê²½ìš°
-		{
-			insentive = (int)(basicSalary*0.7); //insentive=ê¸‰ì—¬*0.7
+			realSalary = (int)(basicSalary*0.8); //½Ç±Ş¿©¿¡ ÀúÀå
 		}
 		
-		realSalary = realSalary + insentive; //ì‹¤ê¸‰ì—¬= ì •ê·œì§ê³¼ ë¹„ì •ê·œì§ì— ë”°ë¥¸ ê¸‰ì—¬+insentive
+		if(po.equals("»ç¿ø")) //Á÷Ã¥ÀÌ »ç¿øÀÎ °æ¿ì
+		{
+			insentive = (int)(basicSalary*0.1); //insentive=±Ş¿©*0.1
+		}
+		else if(po.equals("ÆÀÀå")) //Á÷Ã¥ÀÌ ÆÀÀåÀÎ °æ¿ì
+		{
+			insentive = (int)(basicSalary*0.3); //insentive=±Ş¿©*0.3
+		}
+		else if(po.equals("°úÀå")) //Á÷Ã¥ÀÌ °úÀåÀÎ °æ¿ì
+		{
+			insentive = (int)(basicSalary*0.5); //insentive=±Ş¿©*0.5
+		}
+		else if(po.equals("»çÀå")) //Á÷Ã¥ÀÌ »çÀåÀÎ °æ¿ì
+		{
+			insentive = (int)(basicSalary*0.7); //insentive=±Ş¿©*0.7
+		}else {
+			insentive=0;
+		}
+		
+		realSalary = realSalary + insentive; //½Ç±Ş¿©= Á¤±ÔÁ÷°ú ºñÁ¤±ÔÁ÷¿¡ µû¸¥ ±Ş¿©+insentive
 	}
 } 
