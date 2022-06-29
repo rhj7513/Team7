@@ -1,70 +1,69 @@
-
 public class PersonInfo {
-	//ÇÊµå
-	private String name; //¼öÁ¤
-	private int birthday;
-	private int call; //¼öÁ¤
-	private String address; //¼öÁ¤
-	private int accountNum; //¼öÁ¤
-	private String password; //¼öÁ¤
+   //í•„ë“œ
+   private String name; //ìˆ˜ì •
+   private int birthday;
+   private int call; //ìˆ˜ì •
+   private String address; //ìˆ˜ì •
+   private int accountNum; //ìˆ˜ì •
+   private String password; //ìˆ˜ì •
+   private SalaryOp so;
 
-	//»ı¼ºÀÚ
-	public PersonInfo() {//ºó
-		
-	}
-	
-	public PersonInfo(String n, int b, int c, String ad, int an, String pw) {//ÀüÃ¼
-		name = n;
-		birthday = b;
-		call = c;
-		address = ad;
-		accountNum = an;
-		password = pw;
-	}
-	
-	
-	
-	//getÃß°¡ÇÔ
-	public String getName() {
-		return name;
-	}
-	public int getBirthday() {
-		return birthday;
-	}
-	public int getCall() {
-		return call;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public int getAccountNum() {
-		return accountNum;
-	}
-	public String getPassword() {
-		return password;
-	}
-	
-	
-	
-	//setÃß°¡ÇÔ
-	public void setName(String n) {
-		this.name=n;
-	}
-	public void setBirthday(int b) {
-		this.birthday = b;
-	}
-	public void setCall(int c) {
-		this.call = c;
-	}
-	public void setAddress(String ad) {
-		this.address = ad;
-	}
-	public void setAccountNum(int an) {
-		this.accountNum = an;
-	}
-	public void setPassword(String pw) {
-		this.password = pw;
-	}
-
+   //ìƒì„±ì
+   public PersonInfo() {//ë¹ˆ
+      
+   }
+   
+   public PersonInfo(String n, int b, int c, String ad, int an, String pw) {//ì „ì²´
+      name = n;
+      birthday = b;
+      call = c;
+      address = ad;
+      accountNum = an;
+      password = pw;
+      so = new SalaryOp();
+   }
+   
+   
+   
+   //getì¶”ê°€í•¨
+   public String getName() {
+      return name;
+   }
+   public int getBirthday() {
+      return birthday;
+   }
+   public int getCall() {
+      return call;
+   }
+   public String getAddress() {
+      return address;
+   }
+   public int getAccountNum() {
+      return accountNum;
+   }
+   public String getPassword() {
+      return password;
+   }
+   
+   
+   
+   //setì¶”ê°€í•¨
+   public void setName(String n) {
+      this.name=n;
+   }
+   public void setBirthday(int b) {
+      this.birthday = b;
+   }
+   public void setCall(int c) {
+      this.call = c;
+   }
+   public void setAddress(String ad) {
+      this.address = ad;
+   }
+   public void setAccountNum(int an) {
+      this.accountNum = an;
+   }
+   public void setPassword(String pw) {
+      this.password = pw;
+   }
 }
-  

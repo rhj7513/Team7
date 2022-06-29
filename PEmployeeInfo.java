@@ -1,26 +1,27 @@
 
 public class PEmployeeInfo {
 	private PersonInfo person;
-	//private SalaryOp salaryop; -> SalaryOp class»ý¼º ÈÄ Ãß°¡
+	//private SalaryOp salaryop; -> SalaryOp classï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ß°ï¿½
 
-	//ÇÊµå
+	//ï¿½Êµï¿½
 	private String employeeNum;
 	private String department;
 	private int salary;
 	private SalaryOp so;
-	//»ý¼ºÀÚ
-	public PEmployeeInfo() {//ºó
+	private int realSalary;
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	public PEmployeeInfo() {//ï¿½ï¿½
 		person = new PersonInfo();
 		so=new SalaryOp();
 	}
 	
-//	public PEmployeeInfo(String en, String d, int s) { //ÀüÃ¼
+//	public PEmployeeInfo(String en, String d, int s) { //ï¿½ï¿½Ã¼
 //		employeeNum = en;
 //		department = d;
 //		salary = s;
 //	}
 	
-	//getÃß°¡ÇÔ
+	//getï¿½ß°ï¿½ï¿½ï¿½
 	public String getEmployeeNum() {
 		return employeeNum;
 	}
@@ -30,6 +31,10 @@ public class PEmployeeInfo {
 	public int getSalary() {
 		return salary;
 	}
+	public int getRealSalary() {
+		return realSalary;
+	}
+	
 	
 	public String getName() {
 		return person.getName();
@@ -52,16 +57,19 @@ public class PEmployeeInfo {
 	
 	
 	
-	//setÃß°¡ÇÔ
+	//setï¿½ß°ï¿½ï¿½ï¿½
 	public void setEmployeeNum(String en) {
 		this.employeeNum = en;
 	}
 	public void setDepartment(String d) {
 		this.department = d;
 	}
-	public void setSalary(int s,String en, String po) { //±Þ¿©, »ç¿ø¹øÈ£, Á÷Ã¥
+	public void setSalary(int s) {
+		this.salary=s;
+	}
+	public void setRealSalary(int s,String en, String po) { //ï¿½Þ¿ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½È£, ï¿½ï¿½Ã¥
 		so.setSalaryOp(s, en, po);
-		this.salary=so.getSalaryOp();
+		realSalary=so.getSalaryOp();
 	}
 	
 	public void setName(String name) {
