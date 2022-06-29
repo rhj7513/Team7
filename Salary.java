@@ -1,105 +1,95 @@
 import java.util.*;
 
 public class Salary {
-	private int id;//ì‚¬ë²ˆ ê°œì¸ì •ë³´ í™•ì¸ í•  ë•Œ
-	private String typei;//ì •ê·œì§, ë¹„ì •ê·œì§
-	private FEmployeeInfo[] fei; //ì •ê·œì§ í´ë˜ìŠ¤
-	private PEmployeeInfo[] pei; //ë¹„ì •ê·œì§ í´ë˜ìŠ¤
-	private int fpos;//ì •ê·œì§ í´ë˜ìŠ¤ ë°°ì—´ index
-	private int ppos;//ë¹„ì •ê·œì§ í´ë˜ìŠ¤ ë°°ì—´ index
-	private static int check=1; //1ì´ ê´¸ë¦¬ì 0ì´ ì‚¬ìš©ì
+	private int id;//»ç¹ø °³ÀÎÁ¤º¸ È®ÀÎ ÇÒ ¶§
+	private String typei;//Á¤±ÔÁ÷, ºñÁ¤±ÔÁ÷
+	private FEmployeeInfo[] fei; //Á¤±ÔÁ÷ Å¬·¡½º
+	private PEmployeeInfo[] pei; //ºñÁ¤±ÔÁ÷ Å¬·¡½º
+	private int fpos;//Á¤±ÔÁ÷ Å¬·¡½º ¹è¿­ index
+	private int ppos;//ºñÁ¤±ÔÁ÷ Å¬·¡½º ¹è¿­ index
+	private static int check=1; //1ÀÌ ±­¸®ÀÚ 0ÀÌ »ç¿ëÀÚ
 	
 	public void loginAdmin() {
-		//1. ê´€ë¦¬ì ëª¨ë“œ ë¡œê·¸ì¸
-		//id : admin pw : admin
-		
-//		check =1;
-//		System.out.println(check);
 		Scanner sc=  new Scanner(System.in);
 		
 		String id;
 		String pw;
 		
-		System.out.print("ì•„ì´ë””ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” : ");
+		System.out.print("¾ÆÀÌµğ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
 		id = sc.next();
-		System.out.print("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” : ");
+		System.out.print("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
 		pw = sc.next();
 		
 		if (id.equals("admin")) {
 			if (pw.equals("admin")) {
-				System.out.println("ê´€ë¦¬ì ëª¨ë“œ ");
+				System.out.println("°ü¸®ÀÚ ¸ğµå ");
 				check=1;
 				typei="admin";
 				for(;;) {
-					System.out.println("1. ì…ë ¥ 2. ìˆ˜ì • 3. ì‚­ì œ 4. ê²€ìƒ‰ 5.ì¶œë ¥ 0.ë¡œê·¸ì•„ì›ƒ");
+					System.out.println("1. ÀÔ·Â 2. ¼öÁ¤ 3. »èÁ¦ 4. °Ë»ö 5.Ãâ·Â 0.·Î±×¾Æ¿ô");
 					int num =sc.nextInt();
 					switch(num) {
 					case 1:
-						System.out.println("<<<<ì…ë ¥>>>>");
+						System.out.println("<<<<ÀÔ·Â>>>>");
 						addInfo();
 						break;
 					case 0:
-						System.out.println("ë¡œê·¸ì•„ì›ƒ");
+						System.out.println("·Î±×¾Æ¿ô");
 						check=0;
 						break;
 					case 2:
-						System.out.println("<<<<ìˆ˜ì •>>>>");
+						System.out.println("<<<<¼öÁ¤>>>>");
 						modifyInfo(sc);
 						break;
 					case 3:
-						System.out.println("<<<<ì‚­ì œ>>>>");
+						System.out.println("<<<<»èÁ¦>>>>");
 						deleteInfo(sc);
 						break;
 					case 4:
-						System.out.println("<<<<ê²€ìƒ‰>>>>");
+						System.out.println("<<<<°Ë»ö>>>>");
 						findInfo(sc);
 						break;
 					case 5:
-						System.out.println("<<<<ì¶œë ¥>>>>");
+						System.out.println("<<<<Ãâ·Â>>>>");
 						dispInfo(sc);
 						break;
 					}
 					if(check==0) {
-						break; //ë¬´í•œë£¨í”„íƒˆì¶œ
+						break; //¹«ÇÑ·çÇÁÅ»Ãâ
 					}
 				}
 				
 			}
 		}else {
-			System.out.println("ê´€ë¦¬ì ì•„ì´ë””ê°€ ì•„ë‹™ë‹ˆë‹¤.");
+			System.out.println("°ü¸®ÀÚ ¾ÆÀÌµğ°¡ ¾Æ´Õ´Ï´Ù.");
 		}
 		
 	}
 	
 	public void loginUser() {
-		
-		
-		//2. ì‚¬ìš©ì ëª¨ë“œ ë¡œê·¸ì¸ check=0
-		//id : ì‚¬ì›ë²ˆí˜¸FEmployeeInfo/PEmployeeInfoì˜ employeeNum(String)  pw : PersonInfoì˜ password(String)
-		
 		String empnum;
 		String empw;
 		
 		Scanner sc= new Scanner(System.in);
 		
-		System.out.print("ì‚¬ë²ˆì„ ì…ë ¥í•´ì£¼ì„¸ìš” : ");
+		System.out.print("»ç¹øÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
 		empnum = sc.next();
-		System.out.print("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” : ");
+		System.out.print("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
 		empw = sc.next();
 		
-		//ì •ê·œì§ í´ë˜ìŠ¤ì—ì„œ ì‚¬ë²ˆì„ ì°¾ìŒ
+		//Á¤±ÔÁ÷ Å¬·¡½º¿¡¼­ »ç¹øÀ» Ã£À½
 		 if(empnum.charAt(0)=='F') {
 			 for (int i =0; i<fei.length; i++) {
-				 if (fei[i].getEmployeeNum()!=null) {
-					if (fei[i].getEmployeeNum().equals(empnum)) { //empnum(ì‚¬ìš©ìê°€ ì…ë ¥í•œ ì‚¬ë²ˆ)ê³¼ getEmployeeNum(FEmployeeInfo í´ë˜ìŠ¤ì—ì„œ ì‚¬ì› ë²ˆí˜¸ë¥¼ ê°€ì ¸ì˜¤ê¸°) ë¹„êµ 
-						if (fei[i].getPassword().equals(empw)) { //getPassword = ì‚¬ì›ì´ ì…ë ¥í•´ë‘” ë¹„ë°€ë²ˆí˜¸ ê°€ì ¸ì˜¤ê¸°
-							System.out.println("ë¡œê·¸ì¸ ì„±ê³µ!");
+				 if (fei[i]!=null) {
+					if (empnum.equals(fei[i].getEmployeeNum())) { //empnum(»ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ »ç¹ø)°ú getEmployeeNum(FEmployeeInfo Å¬·¡½º¿¡¼­ »ç¿ø ¹øÈ£¸¦ °¡Á®¿À±â) ºñ±³ 
+						if (empw.equals(fei[i].getPassword())) { //getPassword = »ç¿øÀÌ ÀÔ·ÂÇØµĞ ºñ¹Ğ¹øÈ£ °¡Á®¿À±â
+							System.out.println("·Î±×ÀÎ ¼º°ø!");
 							id = i;
 							typei = "F";
 							check = 0;
 							 for(;;) {
-				            	   System.out.println("1. ê²€ìƒ‰ 2. ìˆ˜ì • 3. ì¶œë ¥ 0.ë¡œê·¸ì•„ì›ƒ");
-					               int userNum=sc.nextInt();//ì…ë ¥
+				            	   System.out.println("1. °Ë»ö 2. ¼öÁ¤ 3. Ãâ·Â 0.·Î±×¾Æ¿ô");
+					               int userNum=sc.nextInt();//ÀÔ·Â
 					               switch(userNum) {
 				               		case 1:
 				               			findInfo(sc);
@@ -120,73 +110,63 @@ public class Salary {
 				               }
 							 break;
 						}else{
-							System.out.println("ë¹„ë²ˆì˜¤ë¥˜ ë‹¤ì‹œì…ë ¥í•´ì£¼ì„¸ìš”");
+							System.out.println("ºñ¹ø¿À·ù ´Ù½ÃÀÔ·ÂÇØÁÖ¼¼¿ä");
 							loginUser();
 							break;
 						}
-					}else{
-						System.out.println("ì‚¬ë²ˆì˜¤ë¥˜ ë‹¤ì‹œì…ë ¥í•´ì£¼ì„¸ìš”");
-						loginUser();
-						break;
 					}
 				}else if(check!=0) {
 					break;
 				}
-				System.out.println("ì‚¬ë²ˆì˜¤ë¥˜ ë‹¤ì‹œì…ë ¥í•´ì£¼ì„¸ìš”");
-				loginUser();
-				break;
+				
 			 }
 			 
 		 }else if(empnum.charAt(0)=='P') {
-			//ë¹„ì •ê·œì§ í´ë˜ìŠ¤ì—ì„œ ì‚¬ë²ˆì„ ì°¾ìŒ
+			//ºñÁ¤±ÔÁ÷ Å¬·¡½º¿¡¼­ »ç¹øÀ» Ã£À½
 				for (int i =0; i<pei.length; i++) {
-					if (pei[i].getEmployeeNum().equals(empnum)) { //empnum(ì‚¬ìš©ìê°€ ì…ë ¥í•œ ì‚¬ë²ˆ)ê³¼ getEmployeeNum(PEmployeeInfo í´ë˜ìŠ¤ì—ì„œ ì‚¬ì› ë²ˆí˜¸ë¥¼ ê°€ì ¸ì˜¤ê¸°) ë¹„êµ 
-						if (pei[i].getPassword().equals(empw)) { //getPassword = ì‚¬ì›ì´ ì…ë ¥í•´ë‘” ë¹„ë°€ë²ˆí˜¸ ê°€ì ¸ì˜¤ê¸°
-							System.out.println("ë¡œê·¸ì¸ ì„±ê³µ!");
-							id = i;
-							typei="P";
-							check =0;
-							for(;;) {
-				            	   System.out.println("1. ê²€ìƒ‰ 2. ìˆ˜ì • 3. ì¶œë ¥ 0.ë¡œê·¸ì•„ì›ƒ");
-					               int userNum=sc.nextInt();//ì…ë ¥
-					               switch(userNum) {
-				               		case 1:
-				               			findInfo(sc);
-				               			break;
-				               		case 2:
-				               			modifyInfo(sc);
-				               			break;
-				               		case 3:
-				               			dispInfo(sc);
-				               			break;		
-				               		case 0:
-				               			break;
+					if(pei[i]!=null) {
+						if (empnum.equals(pei[i].getEmployeeNum())) { //empnum(»ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ »ç¹ø)°ú getEmployeeNum(PEmployeeInfo Å¬·¡½º¿¡¼­ »ç¿ø ¹øÈ£¸¦ °¡Á®¿À±â) ºñ±³ 
+							if (empw.equals(pei[i].getPassword())) { //getPassword = »ç¿øÀÌ ÀÔ·ÂÇØµĞ ºñ¹Ğ¹øÈ£ °¡Á®¿À±â
+								System.out.println("·Î±×ÀÎ ¼º°ø!");
+								id = i;
+								typei="P";
+								check =0;
+								for(;;) {
+					            	   System.out.println("1. °Ë»ö 2. ¼öÁ¤ 3. Ãâ·Â 0.·Î±×¾Æ¿ô");
+						               int userNum=sc.nextInt();//ÀÔ·Â
+						               switch(userNum) {
+					               		case 1:
+					               			findInfo(sc);
+					               			break;
+					               		case 2:
+					               			modifyInfo(sc);
+					               			break;
+					               		case 3:
+					               			dispInfo(sc);
+					               			break;		
+					               		case 0:
+					               			break;
+						               }
+						               if (userNum==0) {
+						            	   break;
+						               }
+					           
 					               }
-					               if (userNum==0) {
-					            	   break;
-					               }
-				           
-				               }
-							break;
+								break;
+							}
+							else {
+								System.out.println("·Î±×ÀÎ ½ÇÆĞ ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
+								break;
+							}
 						}
-						else {
-							System.out.println("ë¡œê·¸ì¸ ì‹¤íŒ¨ ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”");
-							break;
-						}
-					}
-					else {
-						System.out.println("ì‚¬ë²ˆì˜¤ë¥˜ ë‹¤ì‹œì…ë ¥í•´ì£¼ì„¸ìš”");
-						loginUser();
-						break;
 					}
 				} 
 		 }else {		
-			 System.out.println("ì €ì¥ë˜ì–´ ìˆëŠ” ë°ì´í„°ê°€ ì—†ìŠµë‹ˆë‹¤.");			 
-			 
+			 System.out.println("ÀúÀåµÇ¾î ÀÖ´Â µ¥ÀÌÅÍ°¡ ¾ø½À´Ï´Ù.");			  
 		 }
 	}
 	
-	//ìƒì„±ì
+	//»ı¼ºÀÚ
 	public Salary(int num) {
 		fpos=0;
 		ppos=0;
@@ -204,10 +184,7 @@ public class Salary {
 		}
 	}
 	
-	
-	
-	
-	//ì •ê·œì§ (ì‚¬ì›ë²ˆí˜¸, ì§ì±…, ë¶€ì„œ, ì…ì‚¬ë…„ë„, ê¸‰ì—¬)
+	//Á¤±ÔÁ÷ (»ç¿ø¹øÈ£, Á÷Ã¥, ºÎ¼­, ÀÔ»ç³âµµ, ±Ş¿©)
 	public void setFEmployeeInfo(String employeeNum, String position, String department, int year, int salary,
 			String name , int birthday, int call, String address, int accountNum, String password ){
 		fei[fpos].setEmployeeNum(employeeNum);
@@ -225,7 +202,7 @@ public class Salary {
 		fpos++;
 	}
 	
-	//ë¹„ì •ê·œì§ (ì‚¬ì›ë²ˆí˜¸, ê¸‰ì—¬, ë¶€ì„œ)
+	//ºñÁ¤±ÔÁ÷ (»ç¿ø¹øÈ£, ±Ş¿©, ºÎ¼­)
 	public void setPEmployeeInfo(String employeeNum, String department, int salary,
 			String name, int birthday, int call, String address, int accountNum, String password) {
 		pei[ppos].setEmployeeNum(employeeNum);
@@ -241,21 +218,17 @@ public class Salary {
 		ppos++;
 	}
 	
-
-	
 	public void addInfo() {
-		
-		
 		//feild
-		//ì •ê·œì§/ë¹„ì •ê·œì§ + ë²ˆí˜¸ = ì‚¬ë²ˆ
-		String workerType; //ì •ê·œì§ì¸ì§€ ë¹„ì •ê·œì§ì¸ì§€ ë¬¼ì–´ë³¼ë•Œ
-		int empnum;//ì‚¬ë²ˆì˜ ë²ˆí˜¸ëŠ” intí˜• 
-		String employeenum;//ì •ê·œì§/ë¹„ì •ê·œì§ + ë²ˆí˜¸ = ì‚¬ë²ˆ
-		String position; //ì§ì±…
-		String department; //ë¶€ì„œ
-		int year; //ì…ì‚¬ë…„ë„(ëª‡ë…„ì°¬ì§€) = ì •ê·œì§ë§Œ í•´ë‹¹
-		int salary;//ê¸‰ì—¬
-		//ê°œì¸ì •ë³´ ì²˜ìŒì— ì…ë ¥ì€ ê·¸ëŒ€ë¡œ 
+		//Á¤±ÔÁ÷/ºñÁ¤±ÔÁ÷ + ¹øÈ£ = »ç¹ø
+		String workerType; //Á¤±ÔÁ÷ÀÎÁö ºñÁ¤±ÔÁ÷ÀÎÁö ¹°¾îº¼¶§
+		int empnum;//»ç¹øÀÇ ¹øÈ£´Â intÇü 
+		String employeenum;//Á¤±ÔÁ÷/ºñÁ¤±ÔÁ÷ + ¹øÈ£ = »ç¹ø
+		String position; //Á÷Ã¥
+		String department; //ºÎ¼­
+		int year; //ÀÔ»ç³âµµ(¸î³âÂùÁö) = Á¤±ÔÁ÷¸¸ ÇØ´ç
+		int salary;//±Ş¿©
+		//°³ÀÎÁ¤º¸ Ã³À½¿¡ ÀÔ·ÂÀº ±×´ë·Î 
 		String name;
 		int birthday;
 		int call;
@@ -265,367 +238,345 @@ public class Salary {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.print("ì •ê·œì§(F) / ë¹„ì •ê·œì§(P)ì¸ê°€ìš”? : ");
+		System.out.print("Á¤±ÔÁ÷(F) / ºñÁ¤±ÔÁ÷(P)ÀÎ°¡¿ä? : ");
 		workerType = sc.next();
 		
-		if (workerType.equals("F")||workerType.equals("f")) {//ì •ê·œì§ (ì‚¬ì›ë²ˆí˜¸, ì§ì±…, ë¶€ì„œ, ì…ì‚¬ë…„ë„, ê¸‰ì—¬, ê°œì¸ì •ë³´)
-			System.out.print("ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” : ");
+		if (workerType.equals("F")||workerType.equals("f")) {//Á¤±ÔÁ÷ (»ç¿ø¹øÈ£, Á÷Ã¥, ºÎ¼­, ÀÔ»ç³âµµ, ±Ş¿©, °³ÀÎÁ¤º¸)
+			System.out.print("¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
 			empnum = sc.nextInt();
 			employeenum = workerType+empnum;
-			System.out.println("ì‚¬ë²ˆ : " + employeenum);
-			System.out.print("ì§ì±…ì„ ì…ë ¥í•´ì£¼ì„¸ìš” : ");
+			System.out.println("»ç¹ø : " + employeenum);
+			System.out.print("Á÷Ã¥À» ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
 			position = sc.next();
-			System.out.print("ë¶€ì„œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” : ");
+			System.out.print("ºÎ¼­¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
 			department = sc.next();
-			System.out.print("ì…ì‚¬ë…„ë„ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” : ");
+			System.out.print("ÀÔ»ç³âµµ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
 			year = sc.nextInt();
-			System.out.print("ê¸‰ì—¬ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” : ");
+			System.out.print("±Ş¿©¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
 			salary = sc.nextInt();
 			
 			
-			//ê°œì¸ì •ë³´ ì…ë ¥ (ì²˜ìŒì—ëŠ” ê·¸ëƒ¥ ë„£ìŒ)
-			System.out.print("ì´ë¦„ì„ ì…ë ¥í•´ì£¼ì„¸ìš” :");
+			//°³ÀÎÁ¤º¸ ÀÔ·Â (Ã³À½¿¡´Â ±×³É ³ÖÀ½)
+			System.out.print("ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä :");
 			name = sc.next();
-			System.out.print("ì¶œìƒë…„ë„ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” :");
+			System.out.print("Ãâ»ı³âµµ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä :");
 			birthday = sc.nextInt();
-			System.out.print("ì „í™”ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” :");
+			System.out.print("ÀüÈ­¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä :");
 			call = sc.nextInt();
-			System.out.print("ì£¼ì†Œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” :");
+			System.out.print("ÁÖ¼Ò¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä :");
 			address = sc.next();
-			System.out.print("ê³„ì¢Œë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” :");
+			System.out.print("°èÁÂ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä :");
 			accountNum = sc.nextInt();
-			System.out.print("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” :");
+			System.out.print("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä :");
 			password = sc.next();
-			//sl.setFEmployeeInfo(employeenum, position, department, year, salary, name, birthday, call, address, accountNum, password);
-//			for(int i=0;i<fei.length;i++) {
-//				if(fei[i].getEmployeeNum().equals(null)) {
-//					setFEmployeeInfo(employeenum, position, department, year, salary, name, birthday, call, address, accountNum, password);
-//					//fei[i].setEmployeeNum(employeenum);
-//					break;
-//				}
-//			}
+
 			setFEmployeeInfo(employeenum, position, department, year, salary, name, birthday, call, address, accountNum, password);
 			
-		}else if (workerType.equals("P")||workerType.equals("p")) { //ë¹„ì •ê·œì§ (ì‚¬ì›ë²ˆí˜¸, ê¸‰ì—¬, ë¶€ì„œ, ê°œì¸ì •ë³´)
-			System.out.print("ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” : ");
+		}else if (workerType.equals("P")||workerType.equals("p")) { //ºñÁ¤±ÔÁ÷ (»ç¿ø¹øÈ£, ±Ş¿©, ºÎ¼­, °³ÀÎÁ¤º¸)
+			System.out.print("¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
 			empnum = sc.nextInt();
 			employeenum = workerType+empnum;
-			System.out.println("ì‚¬ì›ë²ˆí˜¸ : "+employeenum);
+			System.out.println("»ç¿ø¹øÈ£ : "+employeenum);
 
-			System.out.print("ë¶€ì„œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” : ");
+			System.out.print("ºÎ¼­¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
 			department = sc.next();
-			System.out.print("ê¸‰ì—¬ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” : ");
+			System.out.print("±Ş¿©¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
 			salary = sc.nextInt();
 
 			
-			//ê°œì¸ì •ë³´ ì…ë ¥ (ì²˜ìŒì—ëŠ” ê·¸ëƒ¥ ë„£ìŒ)
-			System.out.print("ì´ë¦„ì„ ì…ë ¥í•´ì£¼ì„¸ìš” :");
+			//°³ÀÎÁ¤º¸ ÀÔ·Â (Ã³À½¿¡´Â ±×³É ³ÖÀ½)
+			System.out.print("ÀÌ¸§À» ÀÔ·ÂÇØÁÖ¼¼¿ä :");
 			name = sc.next();
-			System.out.print("ì¶œìƒë…„ë„ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” :");
+			System.out.print("Ãâ»ı³âµµ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä :");
 			birthday = sc.nextInt();
-			System.out.print("ì „í™”ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” :");
+			System.out.print("ÀüÈ­¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä :");
 			call = sc.nextInt();
-			System.out.print("ì£¼ì†Œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” :");
+			System.out.print("ÁÖ¼Ò¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä :");
 			address = sc.next();
-			System.out.print("ê³„ì¢Œë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” :");
+			System.out.print("°èÁÂ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä :");
 			accountNum = sc.nextInt();
-			System.out.print("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” :");
+			System.out.print("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä :");
 			password = sc.next();
 			//set
 			setPEmployeeInfo(employeenum, department, salary, name, birthday, call, address, accountNum, password);
 			
 		}else {
-			System.out.println("ì˜ëª» ì…ë ¥í–ˆìŠµë‹ˆë‹¤.");
-			//ë©”ë‰´ë¡œ ê°€ê¸°?
-			//whileë¬¸ìœ¼ë¡œ í• ê±´
+			System.out.println("Àß¸ø ÀÔ·ÂÇß½À´Ï´Ù.");
+			//¸Ş´º·Î °¡±â?
+			//while¹®À¸·Î ÇÒ°Ç
 		}
 	}
 	
 	public void modifyInfo(Scanner sc) {		
 		if(typei.equals("admin")) {
-				System.out.println("ë³€ê²½í•  ì‚¬ì›ì˜ ì‚¬ì›ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì‹œì˜¤");
+				System.out.println("º¯°æÇÒ »ç¿øÀÇ »ç¿ø¹øÈ£¸¦ ÀÔ·ÂÇÏ½Ã¿À");
 				String eNum=sc.next();
 				if(eNum.charAt(0)=='F') {					
-					for(int i=0;i<fpos;i++) {
-						System.out.println("dsadasdsadasdasdasdsad");
-						if(fei[i].getEmployeeNum().equals(eNum)) {
-							System.out.println("ì‚¬ì›ë²ˆí˜¸: "+fei[i].getEmployeeNum());
-							System.out.println("ìˆ˜ì •í•  ì •ë³´ë¥¼ ì„ íƒí•˜ì‹œì˜¤");
-							System.out.print("ì§ì±…: "+fei[i].getPosition()+"\t");
-							System.out.print("ë¶€ì„œ: "+fei[i].getDepartment()+"\t");
-							System.out.println("ê¸‰ì—¬: "+fei[i].getSalary()+"\t");
-							System.out.println("1.ì§ì±… 2. ë¶€ì„œ 3.ê¸‰ì—¬ 0.ì¢…ë£Œ");
-							int n=sc.nextInt();
-							if(n==1) {
-								System.out.println("ì§ì±…ì„ ë¬´ì—‡ìœ¼ë¡œ ë³€ê²½í•˜ì‹œê² ìŠµë‹ˆë‹¤.");
-								System.out.println("1.ì‚¬ì› 2. íŒ€ì¥ 3. ê³¼ì¥ 4. ì‚¬ì¥");
-								String jobN=sc.next();
-								if(jobN.equals("1")||jobN.equals("ì‚¬ì›")) {
-									fei[i].setPosition("ì‚¬ì›");
-									System.out.println("ì‚¬ì›ìœ¼ë¡œ ë³€ê²½ì™„ë£Œ");
-								}else if(jobN.equals("2")||jobN.equals("íŒ€ì¥")) {
-									fei[i].setPosition("íŒ€ì¥");
-									System.out.println("íŒ€ì¥ìœ¼ë¡œ ë³€ê²½ì™„ë£Œ");
-								}else if(jobN.equals("3")||jobN.equals("ê³¼ì¥")) {
-									fei[i].setPosition("ê³¼ì¥");
-									System.out.println("ê³¼ì¥ìœ¼ë¡œ ë³€ê²½ì™„ë£Œ");
-								}else if(jobN.equals("4")||jobN.equals("ì‚¬ì¥")) {
-									fei[i].setPosition("ì‚¬ì¥");
-									System.out.println("ì‚¬ì¥ìœ¼ë¡œ ë³€ê²½ì™„ë£Œ");
-								}else {
-									System.out.println("ì…ë ¥ì˜¤ë¥˜");
+					for(int i=0;i<fei.length;i++) {
+						if(fei[i]!=null) {
+							if(eNum.equals(fei[i].getEmployeeNum())) {
+								System.out.println("»ç¿ø¹øÈ£: "+fei[i].getEmployeeNum());
+								System.out.println("¼öÁ¤ÇÒ Á¤º¸¸¦ ¼±ÅÃÇÏ½Ã¿À");
+								System.out.print("Á÷Ã¥: "+fei[i].getPosition()+"\t");
+								System.out.print("ºÎ¼­: "+fei[i].getDepartment()+"\t");
+								System.out.println("±Ş¿©: "+fei[i].getSalary()+"\t");
+								System.out.println("1.Á÷Ã¥ 2. ºÎ¼­ 3.±Ş¿© 0.Á¾·á");
+								int n=sc.nextInt();
+								if(n==1) {
+									System.out.println("Á÷Ã¥À» ¹«¾ùÀ¸·Î º¯°æÇÏ½Ã°Ú½À´Ï´Ù.");
+									System.out.println("1.»ç¿ø 2. ÆÀÀå 3. °úÀå 4. »çÀå");
+									String jobN=sc.next();
+									if(jobN.equals("1")||jobN.equals("»ç¿ø")) {
+										fei[i].setPosition("»ç¿ø");
+										System.out.println("»ç¿øÀ¸·Î º¯°æ¿Ï·á");
+									}else if(jobN.equals("2")||jobN.equals("ÆÀÀå")) {
+										fei[i].setPosition("ÆÀÀå");
+										System.out.println("ÆÀÀåÀ¸·Î º¯°æ¿Ï·á");
+									}else if(jobN.equals("3")||jobN.equals("°úÀå")) {
+										fei[i].setPosition("°úÀå");
+										System.out.println("°úÀåÀ¸·Î º¯°æ¿Ï·á");
+									}else if(jobN.equals("4")||jobN.equals("»çÀå")) {
+										fei[i].setPosition("»çÀå");
+										System.out.println("»çÀåÀ¸·Î º¯°æ¿Ï·á");
+									}else {
+										System.out.println("ÀÔ·Â¿À·ù");
+									}
+									fei[i].setRealSalary(fei[i].getSalary(),fei[i].getEmployeeNum(),fei[i].getPosition());
+									break;
+								}else if(n==2) {
+									System.out.println("ºÎ¼­¸¦ ¹«¾ùÀ¸·Î º¯°æ ÇÏ½Ã°Ú½À´Ï±î");
+									System.out.println("1.ÃÑ¹« 2. ÀÎ»ç 3. È«º¸ 4. ±âÈ¹");
+									String departN=sc.next();
+									if(departN.equals("1")||departN.equals("ÃÑ¹«")) {
+										fei[i].setDepartment("ÃÑ¹«");
+										System.out.println("ÃÑ¹«·Î º¯°æ¿Ï·á");
+									}else if(departN.equals("2")||departN.equals("ÀÎ»ç")) {
+										fei[i].setDepartment("ÀÎ»ç");
+										System.out.println("ÀÎ»ç·Î º¯°æ¿Ï·á");
+									}else if(departN.equals("3")||departN.equals("È«º¸")) {
+										fei[i].setDepartment("È«º¸");
+										System.out.println("È«º¸·Î º¯°æ¿Ï·á");
+									}else if(departN.equals("4")||departN.equals("±âÈ¹")) {
+										fei[i].setDepartment("±âÈ¹");
+										System.out.println("±âÈ¹À¸·Î º¯°æ¿Ï·á");
+									}else {
+										System.out.println("ÀÔ·Â¿À·ù");
+									}
+									break;							
+								}else if(n==3) {
+									System.out.println("º¯°æµÈ ±Ş¿© ÀÔ·Â");
+									int sal=sc.nextInt();
+									fei[i].setSalary(sal);
+									fei[i].setRealSalary(sal,fei[i].getEmployeeNum(),fei[i].getPosition());
+									System.out.println("±Ş¿©º¯°æ ¿Ï·á");
+									break;
+								}else if(n==0) {
+									System.out.println("Á¾·á");
+									break;
 								}
-								fei[i].setRealSalary(fei[i].getSalary(),fei[i].getEmployeeNum(),fei[i].getPosition());
-								break;
-							}else if(n==2) {
-								System.out.println("ë¶€ì„œë¥¼ ë¬´ì—‡ìœ¼ë¡œ ë³€ê²½ í•˜ì‹œê² ìŠµë‹ˆê¹Œ");
-								System.out.println("1.ì´ë¬´ 2. ì¸ì‚¬ 3. í™ë³´ 4. ê¸°íš");
-								String departN=sc.next();
-								if(departN.equals("1")||departN.equals("ì´ë¬´")) {
-									fei[i].setDepartment("ì´ë¬´");
-									System.out.println("ì´ë¬´ë¡œ ë³€ê²½ì™„ë£Œ");
-								}else if(departN.equals("2")||departN.equals("ì¸ì‚¬")) {
-									fei[i].setDepartment("ì¸ì‚¬");
-									System.out.println("ì¸ì‚¬ë¡œ ë³€ê²½ì™„ë£Œ");
-								}else if(departN.equals("3")||departN.equals("í™ë³´")) {
-									fei[i].setDepartment("í™ë³´");
-									System.out.println("í™ë³´ë¡œ ë³€ê²½ì™„ë£Œ");
-								}else if(departN.equals("4")||departN.equals("ê¸°íš")) {
-									fei[i].setDepartment("ê¸°íš");
-									System.out.println("ê¸°íšìœ¼ë¡œ ë³€ê²½ì™„ë£Œ");
-								}else {
-									System.out.println("ì…ë ¥ì˜¤ë¥˜");
-								}
-								break;							
-							}else if(n==3) {
-								System.out.println("ë³€ê²½ëœ ê¸‰ì—¬ ì…ë ¥");
-								int sal=sc.nextInt();
-								fei[i].setSalary(sal);
-								fei[i].setRealSalary(sal,fei[i].getEmployeeNum(),fei[i].getPosition());
-								System.out.println("ê¸‰ì—¬ë³€ê²½ ì™„ë£Œ");
-								break;
-							}else if(n==0) {
-								System.out.println("ì¢…ë£Œ");
-								break;
+							} else {
+								System.out.println("err");
 							}
-						} else if(fei[i].getEmployeeNum().equals(""))
-						{
-							System.out.println("ddd");
-						}
-						else {
-							System.out.println("err");
 						}
 					}				
-				}else if(eNum.charAt(0)=='P') {//ë¹„ì •ê·œì§
-					for(int i=0;i<ppos;i++) {
-						if(pei[i].getEmployeeNum().equals(eNum)) {
-							System.out.println("ì‚¬ì›ë²ˆí˜¸: "+pei[i].getEmployeeNum());
-							System.out.println("ìˆ˜ì •í•  ì •ë³´ë¥¼ ì„ íƒí•˜ì‹œì˜¤");
-							System.out.print("ë¶€ì„œ:"+pei[i].getDepartment()+" \t");
-							System.out.println("ê¸‰ì—¬: "+pei[i].getSalary()+"\t");
-							System.out.println("1.ë¶€ì„œ 2.ê¸‰ì—¬ 0.ì¢…ë£Œ");
-							int n=sc.nextInt();//ì…ë ¥ ìˆ«ì
-							 if(n==1) {
-								System.out.println("ë¶€ì„œë¥¼ ë¬´ì—‡ìœ¼ë¡œ ë³€ê²½ í•˜ì‹œê² ìŠµë‹ˆê¹Œ");
-								System.out.println("1.ì´ë¬´ 2. ì¸ì‚¬ 3. í™ë³´ 4. ê¸°íš");
-								String departN=sc.next();
-								if(departN.equals("1")||departN.equals("ì´ë¬´")) {
-									pei[i].setDepartment("ì´ë¬´");
-									System.out.println("ì´ë¬´ë¡œ ë³€ê²½ì™„ë£Œ");
-								}else if(departN.equals("2")||departN.equals("ì¸ì‚¬")) {
-									pei[i].setDepartment("ì¸ì‚¬");
-									System.out.println("ì¸ì‚¬ë¡œ ë³€ê²½ì™„ë£Œ");
-								}else if(departN.equals("3")||departN.equals("í™ë³´")) {
-									pei[i].setDepartment("í™ë³´");
-									System.out.println("í™ë³´ë¡œ ë³€ê²½ì™„ë£Œ");
-								}else if(departN.equals("4")||departN.equals("ê¸°íš")) {
-									pei[i].setDepartment("ê¸°íš");
-									System.out.println("ê¸°íšìœ¼ë¡œ ë³€ê²½ì™„ë£Œ");
-								}else {
-									System.out.println("ì…ë ¥ì˜¤ë¥˜");
-								}				
-								break;
-							}else if(n==2) {
-								System.out.println("ë³€ê²½ëœ ê¸‰ì—¬ ì…ë ¥");
-								int sal=sc.nextInt();
-								pei[i].setSalary(sal);
-								pei[i].setRealSalary(sal,pei[i].getEmployeeNum(),"");
-								System.out.println("ê¸‰ì—¬ë³€ê²½ ì™„ë£Œ");
-								break;
-							}else if(n==0) {
-								System.out.println("ì¢…ë£Œ");
-								break;
+				}else if(eNum.charAt(0)=='P') {//ºñÁ¤±ÔÁ÷
+					for(int i=0;i<pei.length;i++) {
+						if(pei[i]!=null) {
+							if(eNum.equals(pei[i].getEmployeeNum())) {
+								System.out.println("»ç¿ø¹øÈ£: "+pei[i].getEmployeeNum());
+								System.out.println("¼öÁ¤ÇÒ Á¤º¸¸¦ ¼±ÅÃÇÏ½Ã¿À");
+								System.out.print("ºÎ¼­:"+pei[i].getDepartment()+" \t");
+								System.out.println("±Ş¿©: "+pei[i].getSalary()+"\t");
+								System.out.println("1.ºÎ¼­ 2.±Ş¿© 0.Á¾·á");
+								int n=sc.nextInt();//ÀÔ·Â ¼ıÀÚ
+								 if(n==1) {
+									System.out.println("ºÎ¼­¸¦ ¹«¾ùÀ¸·Î º¯°æ ÇÏ½Ã°Ú½À´Ï±î");
+									System.out.println("1.ÃÑ¹« 2. ÀÎ»ç 3. È«º¸ 4. ±âÈ¹");
+									String departN=sc.next();
+									if(departN.equals("1")||departN.equals("ÃÑ¹«")) {
+										pei[i].setDepartment("ÃÑ¹«");
+										System.out.println("ÃÑ¹«·Î º¯°æ¿Ï·á");
+									}else if(departN.equals("2")||departN.equals("ÀÎ»ç")) {
+										pei[i].setDepartment("ÀÎ»ç");
+										System.out.println("ÀÎ»ç·Î º¯°æ¿Ï·á");
+									}else if(departN.equals("3")||departN.equals("È«º¸")) {
+										pei[i].setDepartment("È«º¸");
+										System.out.println("È«º¸·Î º¯°æ¿Ï·á");
+									}else if(departN.equals("4")||departN.equals("±âÈ¹")) {
+										pei[i].setDepartment("±âÈ¹");
+										System.out.println("±âÈ¹À¸·Î º¯°æ¿Ï·á");
+									}else {
+										System.out.println("ÀÔ·Â¿À·ù");
+									}				
+									break;
+								}else if(n==2) {
+									System.out.println("º¯°æµÈ ±Ş¿© ÀÔ·Â");
+									int sal=sc.nextInt();
+									pei[i].setSalary(sal);
+									pei[i].setRealSalary(sal,pei[i].getEmployeeNum(),"");
+									System.out.println("±Ş¿©º¯°æ ¿Ï·á");
+									break;
+								}else if(n==0) {
+									System.out.println("Á¾·á");
+									break;
+								}
 							}
 						}
 					}
 				}				
 		}else if(typei.equals("F")){
 			for(;;) {
-				System.out.println("ìˆ˜ì •í•  ê°œì¸ì •ë³´ë¥¼ ì„ íƒí•˜ì‹œì˜¤");
-				System.out.println("ì´ë¦„"+fei[id].getName());
-				System.out.print("ìƒë…„ì›”ì¼: "+fei[id].getBirthday()+"\t");
-				System.out.print("ì „í™”ë²ˆí˜¸: "+fei[id].getCall()+"\t");
-				System.out.print("ì£¼ì†Œ: "+fei[id].getAddress()+"\t");
-				System.out.print("ê³„ì¢Œë²ˆí˜¸: "+fei[id].getAccountNum()+"\t");
-				System.out.println("ë¹„ë°€ë²ˆí˜¸: "+fei[id].getPassword());
+				System.out.println("¼öÁ¤ÇÒ °³ÀÎÁ¤º¸¸¦ ¼±ÅÃÇÏ½Ã¿À");
+				System.out.println("ÀÌ¸§"+fei[id].getName());
+				System.out.print("»ı³â¿ùÀÏ: "+fei[id].getBirthday()+"\t");
+				System.out.print("ÀüÈ­¹øÈ£: "+fei[id].getCall()+"\t");
+				System.out.print("ÁÖ¼Ò: "+fei[id].getAddress()+"\t");
+				System.out.print("°èÁÂ¹øÈ£: "+fei[id].getAccountNum()+"\t");
+				System.out.println("ºñ¹Ğ¹øÈ£: "+fei[id].getPassword());
 				System.out.println();
-				System.out.println("1.ì´ë¦„ 2. ìƒë…„ì›”ì¼ 3. ì „í™”ë²ˆí˜¸ 4. ì£¼ì†Œ 5. ê³„ì¢Œë²ˆí˜¸ 6. ë¹„ë°€ë²ˆí˜¸ 0.ì¢…ë£Œ");
-				int n=sc.nextInt(); // ì…ë ¥ ìˆ«ì
+				System.out.println("1.ÀÌ¸§ 2. »ı³â¿ùÀÏ 3. ÀüÈ­¹øÈ£ 4. ÁÖ¼Ò 5. °èÁÂ¹øÈ£ 6. ºñ¹Ğ¹øÈ£ 0.Á¾·á");
+				int n=sc.nextInt(); // ÀÔ·Â ¼ıÀÚ
 				if(n==1) {
-					System.out.println("ì´ë¦„ì„ ë¬´ì—‡ìœ¼ë¡œ ë³€ê²½í•˜ì‹­ë‹ˆê¹Œ?");
+					System.out.println("ÀÌ¸§À» ¹«¾ùÀ¸·Î º¯°æÇÏ½Ê´Ï±î?");
 					fei[id].setName(sc.next());	
-					System.out.println(fei[id].getName()+":ìœ¼ë¡œ ë³€ê²½ì™„ë£Œ");
+					System.out.println(fei[id].getName()+":À¸·Î º¯°æ¿Ï·á");
 					}else if(n==2) {
-						System.out.println("ìƒë…„ì›”ì¼ì„ ë³€ê²½í•˜ì‹­ì‹œì˜¤");
+						System.out.println("»ı³â¿ùÀÏÀ» º¯°æÇÏ½Ê½Ã¿À");
 						fei[id].setBirthday(sc.nextInt());
-						System.out.println(fei[id].getBirthday()+"ìœ¼ë¡œ ë³€ê²½ì™„ë£Œ");
+						System.out.println(fei[id].getBirthday()+"À¸·Î º¯°æ¿Ï·á");
 					}else if(n==3) {
-						System.out.println("ì „í™”ë²ˆí˜¸ë¥¼ ë³€ê²½í•´ì£¼ì„¸ìš”");
+						System.out.println("ÀüÈ­¹øÈ£¸¦ º¯°æÇØÁÖ¼¼¿ä");
 						fei[id].setCall(sc.nextInt());
-						System.out.println(fei[id].getCall()+"ìœ¼ë¡œ ë³€ê²½ì™„ë£Œ");
+						System.out.println(fei[id].getCall()+"À¸·Î º¯°æ¿Ï·á");
 					}else if(n==4) {
-						System.out.println("ì£¼ì†Œë¥¼ ë³€ê²½í•´ì£¼ì„¸ìš”");
+						System.out.println("ÁÖ¼Ò¸¦ º¯°æÇØÁÖ¼¼¿ä");
 						fei[id].setAddress(sc.next());
-						System.out.println(fei[id].getAddress()+"ìœ¼ë¡œ ë³€ê²½ì™„ë£Œ");
+						System.out.println(fei[id].getAddress()+"À¸·Î º¯°æ¿Ï·á");
 					}else if(n==5) {
-						System.out.println("ê³„ì¢Œë²ˆí˜¸ë¥¼ ë³€ê²½í•´ì£¼ì„¸ìš”");
+						System.out.println("°èÁÂ¹øÈ£¸¦ º¯°æÇØÁÖ¼¼¿ä");
 						fei[id].setAccountNum(sc.nextInt());
-						System.out.println(fei[id].getAccountNum()+"ìœ¼ë¡œ ë³€ê²½ì™„ë£Œ");
+						System.out.println(fei[id].getAccountNum()+"À¸·Î º¯°æ¿Ï·á");
 					}else if(n==6) {
-						System.out.println("ë¹„ë°€ë²ˆí˜¸ë¥¼ ë³€ê²½í•´ì£¼ì„¸ìš”");
+						System.out.println("ºñ¹Ğ¹øÈ£¸¦ º¯°æÇØÁÖ¼¼¿ä");
 						fei[id].setPassword(sc.next());
-						System.out.println(fei[id].getPassword()+"ìœ¼ë¡œ ë³€ê²½ì™„ë£Œ");
+						System.out.println(fei[id].getPassword()+"À¸·Î º¯°æ¿Ï·á");
 					}else if(n==0) {
-						System.out.println("ê°œì¸ì •ë³´ìˆ˜ì • ì¢…ë£Œ");
+						System.out.println("°³ÀÎÁ¤º¸¼öÁ¤ Á¾·á");
 						break;
 					}
 			}			
 		}else if(typei.equals("P")){
 			for(;;) {
-				System.out.println("ìˆ˜ì •í•  ê°œì¸ì •ë³´ë¥¼ ì„ íƒí•˜ì‹œì˜¤");
-				System.out.println("ì´ë¦„"+pei[id].getName());
-				System.out.print("ìƒë…„ì›”ì¼: "+pei[id].getBirthday()+"\t");
-				System.out.print("ì „í™”ë²ˆí˜¸: "+pei[id].getCall()+"\t");
-				System.out.print("ì£¼ì†Œ: "+pei[id].getAddress()+"\t");
-				System.out.print("ê³„ì¢Œë²ˆí˜¸: "+pei[id].getAccountNum()+"\t");
-				System.out.println("ë¹„ë°€ë²ˆí˜¸: "+pei[id].getPassword());
+				System.out.println("¼öÁ¤ÇÒ °³ÀÎÁ¤º¸¸¦ ¼±ÅÃÇÏ½Ã¿À");
+				System.out.println("ÀÌ¸§"+pei[id].getName());
+				System.out.print("»ı³â¿ùÀÏ: "+pei[id].getBirthday()+"\t");
+				System.out.print("ÀüÈ­¹øÈ£: "+pei[id].getCall()+"\t");
+				System.out.print("ÁÖ¼Ò: "+pei[id].getAddress()+"\t");
+				System.out.print("°èÁÂ¹øÈ£: "+pei[id].getAccountNum()+"\t");
+				System.out.println("ºñ¹Ğ¹øÈ£: "+pei[id].getPassword());
 				System.out.println();
-				System.out.println("1.ì´ë¦„ 2. ìƒë…„ì›”ì¼ 3. ì „í™”ë²ˆí˜¸ 4. ì£¼ì†Œ 5. ê³„ì¢Œë²ˆí˜¸ 6. ë¹„ë°€ë²ˆí˜¸ 0.ì¢…ë£Œ");
-				int n=sc.nextInt(); // ì…ë ¥ ìˆ«ì
+				System.out.println("1.ÀÌ¸§ 2. »ı³â¿ùÀÏ 3. ÀüÈ­¹øÈ£ 4. ÁÖ¼Ò 5. °èÁÂ¹øÈ£ 6. ºñ¹Ğ¹øÈ£ 0.Á¾·á");
+				int n=sc.nextInt(); // ÀÔ·Â ¼ıÀÚ
 				if(n==1) {
-					System.out.println("ì´ë¦„ì„ ë¬´ì—‡ìœ¼ë¡œ ë³€ê²½í•˜ì‹­ë‹ˆê¹Œ?");
+					System.out.println("ÀÌ¸§À» ¹«¾ùÀ¸·Î º¯°æÇÏ½Ê´Ï±î?");
 					pei[id].setName(sc.next());	
-					System.out.println(pei[id].getName()+":ìœ¼ë¡œ ë³€ê²½ì™„ë£Œ");
+					System.out.println(pei[id].getName()+":À¸·Î º¯°æ¿Ï·á");
 					}else if(n==2) {
-						System.out.println("ìƒë…„ì›”ì¼ì„ ë³€ê²½í•˜ì‹­ì‹œì˜¤");
+						System.out.println("»ı³â¿ùÀÏÀ» º¯°æÇÏ½Ê½Ã¿À");
 						pei[id].setBirthday(sc.nextInt());
-						System.out.println(pei[id].getBirthday()+"ìœ¼ë¡œ ë³€ê²½ì™„ë£Œ");
+						System.out.println(pei[id].getBirthday()+"À¸·Î º¯°æ¿Ï·á");
 					}else if(n==3) {
-						System.out.println("ì „í™”ë²ˆí˜¸ë¥¼ ë³€ê²½í•´ì£¼ì„¸ìš”");
+						System.out.println("ÀüÈ­¹øÈ£¸¦ º¯°æÇØÁÖ¼¼¿ä");
 						pei[id].setCall(sc.nextInt());
-						System.out.println(pei[id].getCall()+"ìœ¼ë¡œ ë³€ê²½ì™„ë£Œ");
+						System.out.println(pei[id].getCall()+"À¸·Î º¯°æ¿Ï·á");
 					}else if(n==4) {
-						System.out.println("ì£¼ì†Œë¥¼ ë³€ê²½í•´ì£¼ì„¸ìš”");
+						System.out.println("ÁÖ¼Ò¸¦ º¯°æÇØÁÖ¼¼¿ä");
 						pei[id].setAddress(sc.next());
-						System.out.println(pei[id].getAddress()+"ìœ¼ë¡œ ë³€ê²½ì™„ë£Œ");
+						System.out.println(pei[id].getAddress()+"À¸·Î º¯°æ¿Ï·á");
 					}else if(n==5) {
-						System.out.println("ê³„ì¢Œë²ˆí˜¸ë¥¼ ë³€ê²½í•´ì£¼ì„¸ìš”");
+						System.out.println("°èÁÂ¹øÈ£¸¦ º¯°æÇØÁÖ¼¼¿ä");
 						pei[id].setAccountNum(sc.nextInt());
-						System.out.println(pei[id].getAccountNum()+"ìœ¼ë¡œ ë³€ê²½ì™„ë£Œ");
+						System.out.println(pei[id].getAccountNum()+"À¸·Î º¯°æ¿Ï·á");
 					}else if(n==6) {
-						System.out.println("ë¹„ë°€ë²ˆí˜¸ë¥¼ ë³€ê²½í•´ì£¼ì„¸ìš”");
+						System.out.println("ºñ¹Ğ¹øÈ£¸¦ º¯°æÇØÁÖ¼¼¿ä");
 						pei[id].setPassword(sc.next());
-						System.out.println(pei[id].getPassword()+"ìœ¼ë¡œ ë³€ê²½ì™„ë£Œ");
+						System.out.println(pei[id].getPassword()+"À¸·Î º¯°æ¿Ï·á");
 					}else if(n==0) {
-						System.out.println("ê°œì¸ì •ë³´ìˆ˜ì • ì¢…ë£Œ");
+						System.out.println("°³ÀÎÁ¤º¸¼öÁ¤ Á¾·á");
 						break;
 					}
 			}		
 		}
 	}
 	public void deleteInfo(Scanner sc) {
-		System.out.println("ì‚­ì œí•  ì‚¬ì›ë²ˆí˜¸");
+		System.out.println("»èÁ¦ÇÒ »ç¿ø¹øÈ£");
 		String eNum=sc.next();
 		if(eNum.charAt(0)=='F') {
-			for(int i=0;i<fpos;i++) {
+			for(int i=0;i<fei.length;i++) {
 				if(eNum.equals(fei[i].getEmployeeNum())) {
-					System.out.print("ì´ë¦„: "+fei[i].getName()+"\t");
-					System.out.println("ì§ì±…: "+fei[i].getPosition()+"ì˜  ì‚¬ì›ì •ë³´ë¥¼ ì‚­ì œí•˜ì‹œëŠ”ê²Œ ë§ìŠµë‹ˆê¹Œ?");
-					System.out.println("1.ì˜ˆ(ì‚­ì œ) 2. ì·¨ì†Œ");
+					System.out.print("ÀÌ¸§: "+fei[i].getName()+"\t");
+					System.out.println("Á÷Ã¥: "+fei[i].getPosition()+"ÀÇ  »ç¿øÁ¤º¸¸¦ »èÁ¦ÇÏ½Ã´Â°Ô ¸Â½À´Ï±î?");
+					System.out.println("1.¿¹(»èÁ¦) 2. Ãë¼Ò");
 					int dN=sc.nextInt();
 					if(dN==1) {
-//						for(int j=0;j<fpos;j++) {
-//							if(fei[j].getEmployeeNum()==null) {
-//								fei[j]
-//							}
-//						}
-//						for(int i=0;i<fei.length;i++) {
-//							if(fei[i].getEmployeeNum()==null) {
-//								setFEmployeeInfo(employeenum, position, department, year, salary, name, birthday, call, address, accountNum, password);
-//								//fei[i].setEmployeeNum(employeenum);
-//								break;S
-//							}
-//						}
-						fei[i].setEmployeeNum(null); //í•„ìš”ì—†ì„ìˆ˜ë„?
-						
-						//fei[i]=null;
-						//fpos=fpos-1;
-						
+						//fei[i].setEmployeeNum(null); //ÇÊ¿ä¾øÀ»¼öµµ?
+						fei[i]=null;
+
 					}else {
 						break;
 					}					
 				}
 			}
 		}else if(eNum.charAt(0)=='P') {
-			for(int i=0;i<ppos;i++) {
+			for(int i=0;i<pei.length;i++) {
 				if(eNum.equals(pei[i].getEmployeeNum())) {
-					System.out.print("ì´ë¦„: "+pei[i].getName()+"\t");
-					System.out.println("ë¶€ì„œ: "+pei[i].getDepartment()+"ì˜  ì‚¬ì›ì •ë³´ë¥¼ ì‚­ì œí•˜ì‹œëŠ”ê²Œ ë§ìŠµë‹ˆê¹Œ?");
-					System.out.println("1.ì˜ˆ(ì‚­ì œ) 2. ì·¨ì†Œ");
+					System.out.print("ÀÌ¸§: "+pei[i].getName()+"\t");
+					System.out.println("ºÎ¼­: "+pei[i].getDepartment()+"ÀÇ  »ç¿øÁ¤º¸¸¦ »èÁ¦ÇÏ½Ã´Â°Ô ¸Â½À´Ï±î?");
+					System.out.println("1.¿¹(»èÁ¦) 2. Ãë¼Ò");
 					int dN=sc.nextInt();
 					if(dN==1) {
-						pei[i].setEmployeeNum(null); //í•„ìš”ì—†ì„ìˆ˜ë„? 	
-						ppos=ppos-1;
+						//pei[i].setEmployeeNum(null); //ÇÊ¿ä¾øÀ»¼öµµ? 	
+						pei[i]=null;
 					}else {
 						break;
 					}					
 				}
 			}
 		}else {
-			System.out.println("ì‚¬ì›ë²ˆí˜¸ ì˜ëª»ì…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤.");
+			System.out.println("»ç¿ø¹øÈ£ Àß¸øÀÔ·ÂÇÏ¼Ì½À´Ï´Ù.");
 		}
 		
 	}
 	
-	public void findInfo(Scanner sc) { //ê²€ìƒ‰ ë©”ì†Œë“œ
+	public void findInfo(Scanner sc) { //°Ë»ö ¸Ş¼Òµå
 	      if(typei.equals("admin"))
 	      {
-	         System.out.println("1 ì´ë¦„ ê²€ìƒ‰    2 ì§ì±… ê²€ìƒ‰    3 ë¶€ì„œ ê²€ìƒ‰");
-	         System.out.print("ê²€ìƒ‰í•˜ê³  ì‹¶ì€ ìˆ«ìë¥¼ ì…ë ¥í•˜ì„¸ìš”:");
+	         System.out.println("1 ÀÌ¸§ °Ë»ö    2 Á÷Ã¥ °Ë»ö    3 ºÎ¼­ °Ë»ö");
+	         System.out.print("°Ë»öÇÏ°í ½ÍÀº ¼ıÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä:");
 	         int num = sc.nextInt();
 	         
 	         switch(num)
 	         {
-	            case 1: //1. ì´ë¦„ ê²€ìƒ‰
-	               System.out.print("ê²€ìƒ‰í•˜ê³  ì‹¶ì€ ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”: ");
+	            case 1: //1. ÀÌ¸§ °Ë»ö
+	               System.out.print("°Ë»öÇÏ°í ½ÍÀº ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä: ");
 	               String name = sc.next();
 	               
-	               System.out.println("========================================"+name+"ì¶œë ¥========================================");
-	               System.out.println("<ì •ê·œì§>");
-	               System.out.println("ì‚¬ì›ë²ˆí˜¸\tì´ë¦„\tì§ì±…\të¶€ì„œ\tì…ì‚¬ë…„ë„\tì‹¤ê¸‰ì—¬\tìƒë…„ì›”ì¼\tì „í™”ë²ˆí˜¸\t\tì£¼ì†Œ\tê³„ì¢Œë²ˆí˜¸\t\të¹„ë°€ë²ˆí˜¸");
-	               for(int i=0; i<fpos; i++) //ì •ê·œì§ ì¶œë ¥
+	               System.out.println("========================================"+name+"Ãâ·Â========================================");
+	               System.out.println("<Á¤±ÔÁ÷>");
+	               System.out.println("»ç¿ø¹øÈ£\tÀÌ¸§\tÁ÷Ã¥\tºÎ¼­\tÀÔ»ç³âµµ\t½Ç±Ş¿©\t»ı³â¿ùÀÏ\tÀüÈ­¹øÈ£\t\tÁÖ¼Ò\t°èÁÂ¹øÈ£\t\tºñ¹Ğ¹øÈ£");
+	               for(int i=0; i<fei.length; i++) //Á¤±ÔÁ÷ Ãâ·Â
 	               {
-	                  if(fei[i].getName().equals(name)) //nullê°’ì´ ì•„ë‹ˆë©´ ì¶œë ¥
+	                  if(fei[i]!=null && name.equals(fei[i].getName())) //null°ªÀÌ ¾Æ´Ï¸é Ãâ·Â
 	                  {
 	                     System.out.println(fei[i].getEmployeeNum()+"\t"+fei[i].getName()+"\t"+fei[i].getPosition()+"\t"+fei[i].getDepartment()+"\t"+fei[i].getYear()+"\t"+fei[i].getRealSalary()+"\t"+
 	                           fei[i].getBirthday()+"\t"+fei[i].getCall()+"\t"+fei[i].getAddress()+"\t"+fei[i].getAccountNum()+"\t"+fei[i].getPassword());
 	                  }
 	               }
-	               System.out.println("<ë¹„ì •ê·œì§>");
-	               System.out.println("ì‚¬ì›ë²ˆí˜¸\tì´ë¦„\të¶€ì„œ\tì‹¤ê¸‰ì—¬\tìƒë…„ì›”ì¼\tì „í™”ë²ˆí˜¸\t\tì£¼ì†Œ\tê³„ì¢Œë²ˆí˜¸\t\të¹„ë°€ë²ˆí˜¸");
-	               for(int i=0; i<ppos; i++) //ë¹„ì •ê·œì§ ì¶œë ¥
+	               System.out.println("<ºñÁ¤±ÔÁ÷>");
+	               System.out.println("»ç¿ø¹øÈ£\tÀÌ¸§\tºÎ¼­\t½Ç±Ş¿©\t»ı³â¿ùÀÏ\tÀüÈ­¹øÈ£\t\tÁÖ¼Ò\t°èÁÂ¹øÈ£\t\tºñ¹Ğ¹øÈ£");
+	               for(int i=0; i<pei.length; i++) //ºñÁ¤±ÔÁ÷ Ãâ·Â
 	               {
-	                  if(pei[i].getName().equals(name)) //nullê°’ì´ ì•„ë‹ˆë©´ ì¶œë ¥
+	                  if(pei[i]!=null && name.equals(pei[i].getName())) //null°ªÀÌ ¾Æ´Ï¸é Ãâ·Â
 	                  {
 	                     System.out.println(pei[i].getEmployeeNum()+"\t"+pei[i].getName()+"\t"+pei[i].getDepartment()+"\t"+pei[i].getRealSalary()+"\t"+
 	                           pei[i].getBirthday()+"\t"+pei[i].getCall()+"\t"+pei[i].getAddress()+"\t"+pei[i].getAccountNum()+"\t"+pei[i].getPassword());
@@ -633,16 +584,16 @@ public class Salary {
 	               }
 	               System.out.println();
 	               break;   
-	            case 2: //ì§ì±… ê²€ìƒ‰
-	               System.out.print("ê²€ìƒ‰í•˜ê³  ì‹¶ì€ ì§ì±…ì„ ì…ë ¥í•˜ì„¸ìš”: ");
+	            case 2: //Á÷Ã¥ °Ë»ö
+	               System.out.print("°Ë»öÇÏ°í ½ÍÀº Á÷Ã¥À» ÀÔ·ÂÇÏ¼¼¿ä: ");
 	               String pos = sc.next();
 	               
-	               System.out.println("========================================"+pos+"ì¶œë ¥========================================");
-	               System.out.println("<ì •ê·œì§>");
-	               System.out.println("ì‚¬ì›ë²ˆí˜¸\tì´ë¦„\tì§ì±…\të¶€ì„œ\tì…ì‚¬ë…„ë„\tì‹¤ê¸‰ì—¬\tìƒë…„ì›”ì¼\tì „í™”ë²ˆí˜¸\t\tì£¼ì†Œ\tê³„ì¢Œë²ˆí˜¸\t\të¹„ë°€ë²ˆí˜¸");
-	               for(int i=0; i<fpos; i++) //ì •ê·œì§ ì¶œë ¥
+	               System.out.println("========================================"+pos+"Ãâ·Â========================================");
+	               System.out.println("<Á¤±ÔÁ÷>");
+	               System.out.println("»ç¿ø¹øÈ£\tÀÌ¸§\tÁ÷Ã¥\tºÎ¼­\tÀÔ»ç³âµµ\t½Ç±Ş¿©\t»ı³â¿ùÀÏ\tÀüÈ­¹øÈ£\t\tÁÖ¼Ò\t°èÁÂ¹øÈ£\t\tºñ¹Ğ¹øÈ£");
+	               for(int i=0; i<fei.length; i++) //Á¤±ÔÁ÷ Ãâ·Â
 	               {
-	                  if(fei[i].getPosition().equals(pos)) //nullê°’ì´ ì•„ë‹ˆë©´ ì¶œë ¥
+	                  if(fei[i]!=null && pos.equals(fei[i].getPosition())) //null°ªÀÌ ¾Æ´Ï¸é Ãâ·Â
 	                  {
 	                     System.out.println(fei[i].getEmployeeNum()+"\t"+fei[i].getName()+"\t"+fei[i].getPosition()+"\t"+fei[i].getDepartment()+"\t"+fei[i].getYear()+"\t"+fei[i].getRealSalary()+"\t"+
 	                           fei[i].getBirthday()+"\t"+fei[i].getCall()+"\t"+fei[i].getAddress()+"\t"+fei[i].getAccountNum()+"\t"+fei[i].getPassword());
@@ -650,26 +601,26 @@ public class Salary {
 	               }
 	               System.out.println();
 	               break;
-	            case 3: //ë¶€ì„œ ê²€ìƒ‰
-	               System.out.print("ê²€ìƒ‰í•˜ê³  ì‹¶ì€ ë¶€ì„œë¥¼ ì…ë ¥í•˜ì„¸ìš”: ");
+	            case 3: //ºÎ¼­ °Ë»ö
+	               System.out.print("°Ë»öÇÏ°í ½ÍÀº ºÎ¼­¸¦ ÀÔ·ÂÇÏ¼¼¿ä: ");
 	               String dep = sc.next();
 	               
-	               System.out.println("========================================"+dep+"ì¶œë ¥========================================");
-	               System.out.println("<ì •ê·œì§>");
-	               System.out.println("ì‚¬ì›ë²ˆí˜¸\tì´ë¦„\tì§ì±…\të¶€ì„œ\tì…ì‚¬ë…„ë„\tì‹¤ê¸‰ì—¬\tìƒë…„ì›”ì¼\tì „í™”ë²ˆí˜¸\t\tì£¼ì†Œ\tê³„ì¢Œë²ˆí˜¸\t\të¹„ë°€ë²ˆí˜¸");
-	               for(int i=0; i<fpos; i++) //ì •ê·œì§ ì¶œë ¥
+	               System.out.println("========================================"+dep+"Ãâ·Â========================================");
+	               System.out.println("<Á¤±ÔÁ÷>");
+	               System.out.println("»ç¿ø¹øÈ£\tÀÌ¸§\tÁ÷Ã¥\tºÎ¼­\tÀÔ»ç³âµµ\t½Ç±Ş¿©\t»ı³â¿ùÀÏ\tÀüÈ­¹øÈ£\t\tÁÖ¼Ò\t°èÁÂ¹øÈ£\t\tºñ¹Ğ¹øÈ£");
+	               for(int i=0; i<fei.length; i++) //Á¤±ÔÁ÷ Ãâ·Â
 	               {
-	                  if(fei[i].getDepartment().equals(dep)) //nullê°’ì´ ì•„ë‹ˆë©´ ì¶œë ¥
+	                  if(fei[i]!=null && dep.equals(fei[i].getDepartment())) //null°ªÀÌ ¾Æ´Ï¸é Ãâ·Â
 	                  {
 	                     System.out.println(fei[i].getEmployeeNum()+"\t"+fei[i].getName()+"\t"+fei[i].getPosition()+"\t"+fei[i].getDepartment()+"\t"+fei[i].getYear()+"\t"+fei[i].getRealSalary()+"\t"+
 	                           fei[i].getBirthday()+"\t"+fei[i].getCall()+"\t"+fei[i].getAddress()+"\t"+fei[i].getAccountNum()+"\t"+fei[i].getPassword());
 	                  }
 	               }
-	               System.out.println("<ë¹„ì •ê·œì§>");
-	               System.out.println("ì‚¬ì›ë²ˆí˜¸\tì´ë¦„\të¶€ì„œ\tì‹¤ê¸‰ì—¬\tìƒë…„ì›”ì¼\tì „í™”ë²ˆí˜¸\t\tì£¼ì†Œ\tê³„ì¢Œë²ˆí˜¸\t\të¹„ë°€ë²ˆí˜¸");
-	               for(int i=0; i<ppos; i++) //ë¹„ì •ê·œì§ ì¶œë ¥
+	               System.out.println("<ºñÁ¤±ÔÁ÷>");
+	               System.out.println("»ç¿ø¹øÈ£\tÀÌ¸§\tºÎ¼­\t½Ç±Ş¿©\t»ı³â¿ùÀÏ\tÀüÈ­¹øÈ£\t\tÁÖ¼Ò\t°èÁÂ¹øÈ£\t\tºñ¹Ğ¹øÈ£");
+	               for(int i=0; i<pei.length; i++) //ºñÁ¤±ÔÁ÷ Ãâ·Â
 	               {
-	                  if(pei[i].getDepartment().equals(dep)) //nullê°’ì´ ì•„ë‹ˆë©´ ì¶œë ¥
+	                  if(pei[i]!=null && dep.equals(pei[i].getDepartment())) //null°ªÀÌ ¾Æ´Ï¸é Ãâ·Â
 	                  {
 	                     System.out.println(pei[i].getEmployeeNum()+"\t"+pei[i].getName()+"\t"+pei[i].getDepartment()+"\t"+pei[i].getRealSalary()+"\t"+
 	                           pei[i].getBirthday()+"\t"+pei[i].getCall()+"\t"+pei[i].getAddress()+"\t"+pei[i].getAccountNum()+"\t"+pei[i].getPassword());
@@ -681,72 +632,72 @@ public class Salary {
 	      }
 	      else
 	      {
-	         System.out.println("1 ì´ë¦„ ê²€ìƒ‰    2 ì§ì±… ê²€ìƒ‰    3 ë¶€ì„œ ê²€ìƒ‰");
-	         System.out.print("ê²€ìƒ‰í•˜ê³  ì‹¶ì€ ìˆ«ìë¥¼ ì…ë ¥í•˜ì„¸ìš”:");
+	         System.out.println("1 ÀÌ¸§ °Ë»ö    2 Á÷Ã¥ °Ë»ö    3 ºÎ¼­ °Ë»ö");
+	         System.out.print("°Ë»öÇÏ°í ½ÍÀº ¼ıÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä:");
 	         int num = sc.nextInt();
 	         
 	         switch(num)
 	         {
-	            case 1: //1. ì´ë¦„ ê²€ìƒ‰
-	               System.out.print("ê²€ìƒ‰í•˜ê³  ì‹¶ì€ ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”: ");
+	            case 1: //1. ÀÌ¸§ °Ë»ö
+	               System.out.print("°Ë»öÇÏ°í ½ÍÀº ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä: ");
 	               String name = sc.next();
 	               
-	               System.out.println("========================================"+name+"ì¶œë ¥========================================");
-	               System.out.println("<ì •ê·œì§>");
-	               System.out.println("ì‚¬ì›ë²ˆí˜¸\tì´ë¦„\tì§ì±…\të¶€ì„œ\tì…ì‚¬ë…„ë„");
-	               for(int i=0; i<fpos; i++) //ì •ê·œì§ ì¶œë ¥
+	               System.out.println("========================================"+name+"Ãâ·Â========================================");
+	               System.out.println("<Á¤±ÔÁ÷>");
+	               System.out.println("»ç¿ø¹øÈ£\tÀÌ¸§\tÁ÷Ã¥\tºÎ¼­\tÀÔ»ç³âµµ");
+	               for(int i=0; i<fei.length; i++) //Á¤±ÔÁ÷ Ãâ·Â
 	               {
-	                  if(fei[i].getName().equals(name)) //nullê°’ì´ ì•„ë‹ˆë©´ ì¶œë ¥
+	                  if(fei[i]!=null && name.equals(fei[i].getName())) //null°ªÀÌ ¾Æ´Ï¸é Ãâ·Â
 	                  {
 	                     System.out.println(fei[i].getEmployeeNum()+"\t"+fei[i].getName()+"\t"+fei[i].getPosition()+"\t"+fei[i].getDepartment()+"\t"+fei[i].getYear());
 	                  }
 	               }
-	               System.out.println("<ë¹„ì •ê·œì§>");
-	               System.out.println("ì‚¬ì›ë²ˆí˜¸\tì´ë¦„\të¶€ì„œ");
-	               for(int i=0; i<ppos; i++) //ë¹„ì •ê·œì§ ì¶œë ¥
+	               System.out.println("<ºñÁ¤±ÔÁ÷>");
+	               System.out.println("»ç¿ø¹øÈ£\tÀÌ¸§\tºÎ¼­");
+	               for(int i=0; i<pei.length; i++) //ºñÁ¤±ÔÁ÷ Ãâ·Â
 	               {
-	                  if(pei[i].getName().equals(name)) //nullê°’ì´ ì•„ë‹ˆë©´ ì¶œë ¥
+	                  if(pei[i]!=null && name.equals(pei[i].getName())) //null°ªÀÌ ¾Æ´Ï¸é Ãâ·Â
 	                  {
 	                     System.out.println(pei[i].getEmployeeNum()+"\t"+pei[i].getName()+"\t"+pei[i].getDepartment());
 	                  }
 	               }
 	               System.out.println();
 	               break;   
-	            case 2: //ì§ì±… ê²€ìƒ‰
-	               System.out.print("ê²€ìƒ‰í•˜ê³  ì‹¶ì€ ì§ì±…ì„ ì…ë ¥í•˜ì„¸ìš”: ");
+	            case 2: //Á÷Ã¥ °Ë»ö
+	               System.out.print("°Ë»öÇÏ°í ½ÍÀº Á÷Ã¥À» ÀÔ·ÂÇÏ¼¼¿ä: ");
 	               String pos = sc.next();
 	               
-	               System.out.println("========================================"+pos+"ì¶œë ¥========================================");
-	               System.out.println("<ì •ê·œì§>");
-	               System.out.println("ì‚¬ì›ë²ˆí˜¸\tì´ë¦„\tì§ì±…\të¶€ì„œ\tì…ì‚¬ë…„ë„");
-	               for(int i=0; i<fpos; i++) //ì •ê·œì§ ì¶œë ¥
+	               System.out.println("========================================"+pos+"Ãâ·Â========================================");
+	               System.out.println("<Á¤±ÔÁ÷>");
+	               System.out.println("»ç¿ø¹øÈ£\tÀÌ¸§\tÁ÷Ã¥\tºÎ¼­\tÀÔ»ç³âµµ");
+	               for(int i=0; i<fei.length; i++) //Á¤±ÔÁ÷ Ãâ·Â
 	               {
-	                  if(fei[i].getPosition().equals(pos)) //nullê°’ì´ ì•„ë‹ˆë©´ ì¶œë ¥
+	                  if(fei[i]!=null && pos.equals(fei[i].getPosition())) //null°ªÀÌ ¾Æ´Ï¸é Ãâ·Â
 	                  {
 	                     System.out.println(fei[i].getEmployeeNum()+"\t"+fei[i].getName()+"\t"+fei[i].getPosition()+"\t"+fei[i].getDepartment()+"\t"+fei[i].getYear());
 	                  }
 	               }
 	               System.out.println();
 	               break;
-	            case 3: //ë¶€ì„œ ê²€ìƒ‰
-	               System.out.print("ê²€ìƒ‰í•˜ê³  ì‹¶ì€ ë¶€ì„œë¥¼ ì…ë ¥í•˜ì„¸ìš”: ");
+	            case 3: //ºÎ¼­ °Ë»ö
+	               System.out.print("°Ë»öÇÏ°í ½ÍÀº ºÎ¼­¸¦ ÀÔ·ÂÇÏ¼¼¿ä: ");
 	               String dep = sc.next();
 	               
-	               System.out.println("========================================"+dep+"ì¶œë ¥========================================");
-	               System.out.println("<ì •ê·œì§>");
-	               System.out.println("ì‚¬ì›ë²ˆí˜¸\tì´ë¦„\tì§ì±…\të¶€ì„œ\tì…ì‚¬ë…„ë„");
-	               for(int i=0; i<fpos; i++) //ì •ê·œì§ ì¶œë ¥
+	               System.out.println("========================================"+dep+"Ãâ·Â========================================");
+	               System.out.println("<Á¤±ÔÁ÷>");
+	               System.out.println("»ç¿ø¹øÈ£\tÀÌ¸§\tÁ÷Ã¥\tºÎ¼­\tÀÔ»ç³âµµ");
+	               for(int i=0; i<fei.length; i++) //Á¤±ÔÁ÷ Ãâ·Â
 	               {
-	                  if(fei[i].getDepartment().equals(dep)) //nullê°’ì´ ì•„ë‹ˆë©´ ì¶œë ¥
+	                  if(fei[i]!=null && dep.equals(fei[i].getDepartment())) //null°ªÀÌ ¾Æ´Ï¸é Ãâ·Â
 	                  {
 	                     System.out.println(fei[i].getEmployeeNum()+"\t"+fei[i].getName()+"\t"+fei[i].getPosition()+"\t"+fei[i].getDepartment()+"\t"+fei[i].getYear());
 	                  }
 	               }
-	               System.out.println("<ë¹„ì •ê·œì§>");
-	               System.out.println("ì‚¬ì›ë²ˆí˜¸\tì´ë¦„\të¶€ì„œ");
-	               for(int i=0; i<ppos; i++) //ë¹„ì •ê·œì§ ì¶œë ¥
+	               System.out.println("<ºñÁ¤±ÔÁ÷>");
+	               System.out.println("»ç¿ø¹øÈ£\tÀÌ¸§\tºÎ¼­");
+	               for(int i=0; i<pei.length; i++) //ºñÁ¤±ÔÁ÷ Ãâ·Â
 	               {
-	                  if(pei[i].getDepartment().equals(dep)) //nullê°’ì´ ì•„ë‹ˆë©´ ì¶œë ¥
+	                  if(pei[i]!=null && dep.equals(pei[i].getDepartment())) //null°ªÀÌ ¾Æ´Ï¸é Ãâ·Â
 	                  {
 	                     System.out.println(pei[i].getEmployeeNum()+"\t"+pei[i].getName()+"\t"+pei[i].getDepartment());
 	                  }
@@ -759,33 +710,33 @@ public class Salary {
 	   }
 	
 	
-	public void dispInfo(Scanner sc) { //ì¶œë ¥ ë©”ì†Œë“œ
+	public void dispInfo(Scanner sc) { //Ãâ·Â ¸Ş¼Òµå
 	      
 	      if(typei.equals("admin"))
 	      {
-	         System.out.println("1 ì „ì²´ ì¶œë ¥    2 ì •ê·œì§ ì „ì²´ ì¶œë ¥    3 ë¹„ì •ê·œì§ ì „ì²´ ì¶œë ¥");
-	         System.out.print("ì¶œë ¥í•˜ê³  ì‹¶ì€ ìˆ«ìë¥¼ ì…ë ¥í•˜ì„¸ìš”:");
+	         System.out.println("1 ÀüÃ¼ Ãâ·Â    2 Á¤±ÔÁ÷ ÀüÃ¼ Ãâ·Â    3 ºñÁ¤±ÔÁ÷ ÀüÃ¼ Ãâ·Â");
+	         System.out.print("Ãâ·ÂÇÏ°í ½ÍÀº ¼ıÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä:");
 	         int num = sc.nextInt();
 	         
 	         switch(num)
 	         {
-	            case 1: //1. ì „ì²´ ì¶œë ¥
-	               System.out.println("========================================ì „ì²´ ì¶œë ¥========================================");
-	               System.out.println("<ì •ê·œì§>");
-	               System.out.println("ì‚¬ì›ë²ˆí˜¸\tì´ë¦„\tì§ì±…\të¶€ì„œ\tì…ì‚¬ë…„ë„\tì‹¤ê¸‰ì—¬\tìƒë…„ì›”ì¼\tì „í™”ë²ˆí˜¸\t\tì£¼ì†Œ\tê³„ì¢Œë²ˆí˜¸\t\të¹„ë°€ë²ˆí˜¸");
-	               for(int i=0; i<fpos; i++) //ì •ê·œì§ ì¶œë ¥
+	            case 1: //1. ÀüÃ¼ Ãâ·Â
+	               System.out.println("========================================ÀüÃ¼ Ãâ·Â========================================");
+	               System.out.println("<Á¤±ÔÁ÷>");
+	               System.out.println("»ç¿ø¹øÈ£\tÀÌ¸§\tÁ÷Ã¥\tºÎ¼­\tÀÔ»ç³âµµ\t½Ç±Ş¿©\t»ı³â¿ùÀÏ\tÀüÈ­¹øÈ£\t\tÁÖ¼Ò\t°èÁÂ¹øÈ£\t\tºñ¹Ğ¹øÈ£");
+	               for(int i=0; i<fei.length; i++) //Á¤±ÔÁ÷ Ãâ·Â
 	               {
-	                  if(fei[i].getEmployeeNum()!=null) //nullê°’ì´ ì•„ë‹ˆë©´ ì¶œë ¥
+	                  if(fei[i]!=null && fei[i].getEmployeeNum()!=null) //null°ªÀÌ ¾Æ´Ï¸é Ãâ·Â
 	                  {
 	                     System.out.println(fei[i].getEmployeeNum()+"\t"+fei[i].getName()+"\t"+fei[i].getPosition()+"\t"+fei[i].getDepartment()+"\t"+fei[i].getYear()+"\t"+fei[i].getRealSalary()+"\t"+
 	                           fei[i].getBirthday()+"\t"+fei[i].getCall()+"\t"+fei[i].getAddress()+"\t"+fei[i].getAccountNum()+"\t"+fei[i].getPassword());
 	                  }
 	               }
-	               System.out.println("<ë¹„ì •ê·œì§>");
-	               System.out.println("ì‚¬ì›ë²ˆí˜¸\tì´ë¦„\të¶€ì„œ\tì‹¤ê¸‰ì—¬\tìƒë…„ì›”ì¼\tì „í™”ë²ˆí˜¸\t\tì£¼ì†Œ\tê³„ì¢Œë²ˆí˜¸\t\të¹„ë°€ë²ˆí˜¸");
-	               for(int i=0; i<ppos; i++) //ë¹„ì •ê·œì§ ì¶œë ¥
+	               System.out.println("<ºñÁ¤±ÔÁ÷>");
+	               System.out.println("»ç¿ø¹øÈ£\tÀÌ¸§\tºÎ¼­\t½Ç±Ş¿©\t»ı³â¿ùÀÏ\tÀüÈ­¹øÈ£\t\tÁÖ¼Ò\t°èÁÂ¹øÈ£\t\tºñ¹Ğ¹øÈ£");
+	               for(int i=0; i<pei.length; i++) //ºñÁ¤±ÔÁ÷ Ãâ·Â
 	               {
-	                  if(pei[i].getEmployeeNum()!=null) //nullê°’ì´ ì•„ë‹ˆë©´ ì¶œë ¥
+	                  if(pei[i]!=null && pei[i].getEmployeeNum()!=null) //null°ªÀÌ ¾Æ´Ï¸é Ãâ·Â
 	                  {
 	                     System.out.println(pei[i].getEmployeeNum()+"\t"+pei[i].getName()+"\t"+pei[i].getDepartment()+"\t"+pei[i].getRealSalary()+"\t"+
 	                           pei[i].getBirthday()+"\t"+pei[i].getCall()+"\t"+pei[i].getAddress()+"\t"+pei[i].getAccountNum()+"\t"+pei[i].getPassword());
@@ -794,12 +745,12 @@ public class Salary {
 	               System.out.println();
 	               break;
 	               
-	            case 2: //2. ì •ê·œì§ ì „ì²´ ì¶œë ¥
-	               System.out.println("========================================ì •ê·œì§ ì¶œë ¥========================================");
-	               System.out.println("ì‚¬ì›ë²ˆí˜¸\tì´ë¦„\tì§ì±…\të¶€ì„œ\tì…ì‚¬ë…„ë„\tì‹¤ê¸‰ì—¬\tìƒë…„ì›”ì¼\tì „í™”ë²ˆí˜¸\t\tì£¼ì†Œ\tê³„ì¢Œë²ˆí˜¸\t\të¹„ë°€ë²ˆí˜¸");
-	               for(int i=0; i<fei.length; i++) //ì •ê·œì§ ì¶œë ¥
+	            case 2: //2. Á¤±ÔÁ÷ ÀüÃ¼ Ãâ·Â
+	               System.out.println("========================================Á¤±ÔÁ÷ Ãâ·Â========================================");
+	               System.out.println("»ç¿ø¹øÈ£\tÀÌ¸§\tÁ÷Ã¥\tºÎ¼­\tÀÔ»ç³âµµ\t½Ç±Ş¿©\t»ı³â¿ùÀÏ\tÀüÈ­¹øÈ£\t\tÁÖ¼Ò\t°èÁÂ¹øÈ£\t\tºñ¹Ğ¹øÈ£");
+	               for(int i=0; i<fei.length; i++) //Á¤±ÔÁ÷ Ãâ·Â
 	               {
-	                  if(fei[i].getEmployeeNum()!=null) //nullê°’ì´ ì•„ë‹ˆë©´ ì¶œë ¥
+	                  if(fei[i]!=null && fei[i].getEmployeeNum()!=null) //null°ªÀÌ ¾Æ´Ï¸é Ãâ·Â
 	                  {
 	                     System.out.println(fei[i].getEmployeeNum()+"\t"+fei[i].getName()+"\t"+fei[i].getPosition()+"\t"+fei[i].getDepartment()+"\t"+fei[i].getYear()+"\t"+fei[i].getRealSalary()+"\t"+
 	                           fei[i].getBirthday()+"\t"+fei[i].getCall()+"\t"+fei[i].getAddress()+"\t"+fei[i].getAccountNum()+"\t"+fei[i].getPassword());
@@ -807,12 +758,12 @@ public class Salary {
 	               }
 	               System.out.println();
 	               break;
-	            case 3: //3. ë¹„ì •ê·œì§ ì „ì²´ ì¶œë ¥
-	               System.out.println("========================================ë¹„ì •ê·œì§ ì¶œë ¥========================================");
-	               System.out.println("ì‚¬ì›ë²ˆí˜¸\tì´ë¦„\të¶€ì„œ\tì‹¤ê¸‰ì—¬\tìƒë…„ì›”ì¼\tì „í™”ë²ˆí˜¸\t\tì£¼ì†Œ\tê³„ì¢Œë²ˆí˜¸\t\të¹„ë°€ë²ˆí˜¸");
-	               for(int i=0; i<pei.length; i++) //ë¹„ì •ê·œì§ ì¶œë ¥
+	            case 3: //3. ºñÁ¤±ÔÁ÷ ÀüÃ¼ Ãâ·Â
+	               System.out.println("========================================ºñÁ¤±ÔÁ÷ Ãâ·Â========================================");
+	               System.out.println("»ç¿ø¹øÈ£\tÀÌ¸§\tºÎ¼­\t½Ç±Ş¿©\t»ı³â¿ùÀÏ\tÀüÈ­¹øÈ£\t\tÁÖ¼Ò\t°èÁÂ¹øÈ£\t\tºñ¹Ğ¹øÈ£");
+	               for(int i=0; i<pei.length; i++) //ºñÁ¤±ÔÁ÷ Ãâ·Â
 	               {
-	                  if(pei[i].getEmployeeNum()!=null) //nullê°’ì´ ì•„ë‹ˆë©´ ì¶œë ¥
+	                  if(pei[i]!=null && pei[i].getEmployeeNum()!=null) //null°ªÀÌ ¾Æ´Ï¸é Ãâ·Â
 	                  {
 	                     System.out.println(pei[i].getEmployeeNum()+"\t"+pei[i].getName()+"\t"+pei[i].getDepartment()+"\t"+pei[i].getRealSalary()+"\t"+
 	                           pei[i].getBirthday()+"\t"+pei[i].getCall()+"\t"+pei[i].getAddress()+"\t"+pei[i].getAccountNum()+"\t"+pei[i].getPassword());
@@ -825,13 +776,13 @@ public class Salary {
 	      }
 	      else if(typei.equals("F"))
 	      {   
-	    	  System.out.println("ì‚¬ì›ë²ˆí˜¸\tì´ë¦„\tì§ì±…\të¶€ì„œ\tì…ì‚¬ë…„ë„\tì‹¤ê¸‰ì—¬\tìƒë…„ì›”ì¼\tì „í™”ë²ˆí˜¸\t\tì£¼ì†Œ\tê³„ì¢Œë²ˆí˜¸\t\të¹„ë°€ë²ˆí˜¸");
+	    	  System.out.println("»ç¿ø¹øÈ£\tÀÌ¸§\tÁ÷Ã¥\tºÎ¼­\tÀÔ»ç³âµµ\t½Ç±Ş¿©\t»ı³â¿ùÀÏ\tÀüÈ­¹øÈ£\t\tÁÖ¼Ò\t°èÁÂ¹øÈ£\t\tºñ¹Ğ¹øÈ£");
 	         System.out.println(fei[id].getEmployeeNum()+"\t"+fei[id].getName()+"\t"+fei[id].getPosition()+"\t"+fei[id].getDepartment()+"\t"+fei[id].getYear()+"\t"+fei[id].getRealSalary()+"\t"+
 	               fei[id].getBirthday()+"\t"+fei[id].getCall()+"\t"+fei[id].getAddress()+"\t"+fei[id].getAccountNum()+"\t"+fei[id].getPassword());
 	      }
 	      else if(typei.equals("P"))
 	      {
-	    	  System.out.println("ì‚¬ì›ë²ˆí˜¸\tì´ë¦„\të¶€ì„œ\tì‹¤ê¸‰ì—¬\tìƒë…„ì›”ì¼\tì „í™”ë²ˆí˜¸\t\tì£¼ì†Œ\tê³„ì¢Œë²ˆí˜¸\t\të¹„ë°€ë²ˆí˜¸");
+	    	  System.out.println("»ç¿ø¹øÈ£\tÀÌ¸§\tºÎ¼­\t½Ç±Ş¿©\t»ı³â¿ùÀÏ\tÀüÈ­¹øÈ£\t\tÁÖ¼Ò\t°èÁÂ¹øÈ£\t\tºñ¹Ğ¹øÈ£");
 	         System.out.println(pei[id].getEmployeeNum()+"\t"+pei[id].getName()+"\t"+pei[id].getDepartment()+"\t"+pei[id].getRealSalary()+"\t"+
 	               pei[id].getBirthday()+"\t"+pei[id].getCall()+"\t"+pei[id].getAddress()+"\t"+pei[id].getAccountNum()+"\t"+pei[id].getPassword());
 	      }
@@ -839,45 +790,15 @@ public class Salary {
 	   }
 	
 	
-	private String aid, apw;//ê´€ë¦¬ì ì•„ì´ë”” ë¹„ë°€ë²ˆí˜¸ ê°’ ì €ì¥
-	
-	public Salary(String aid, String apw,int num) {
-		this.aid = aid;
-		this.apw = apw;
-		fpos=0;
-		ppos=0;
-		
-		fei = new FEmployeeInfo[num];
-		pei = new PEmployeeInfo[num];
-		
-		for (int i=0; i<num; i++) {
-			
-				fei[i] = new FEmployeeInfo();
-	
-			
-			if (pei[i]==null) {
-				pei[i] = new PEmployeeInfo();
-			}
-		}
-	}
-	
-	public String getAid() {
-		return aid;
-	}
-	public String getApw() {
-		return apw;
-	}
+	private String aid, apw;//°ü¸®ÀÚ ¾ÆÀÌµğ ºñ¹Ğ¹øÈ£ °ª ÀúÀå
 
-	
-	
-	
 	public static void main(String[] args) {	
 		
 		Scanner sc= new Scanner(System.in);
 		Salary iidd = new Salary(50);
-		System.out.println("ì²«ì‹¤í–‰ì…ë‹ˆë‹¤ ê´€ë¦¬ìë¡œê·¸ì¸ë¶€í„° í•´ì£¼ì‹­ì‡¼");
+		System.out.println("Ã¹½ÇÇàÀÔ´Ï´Ù °ü¸®ÀÚ·Î±×ÀÎºÎÅÍ ÇØÁÖ½Ê¼î");
 		for(;;) {
-			System.out.println("1. ê´€ë¦¬ì ë¡œê·¸ì¸ 2. ì‚¬ìš©ì ë¡œê·¸ì¸ 0. ì‹œìŠ¤í…œì¢…ë£Œ");
+			System.out.println("1. °ü¸®ÀÚ ·Î±×ÀÎ 2. »ç¿ëÀÚ ·Î±×ÀÎ 0. ½Ã½ºÅÛÁ¾·á");
 			int loginN=sc.nextInt();
 			
 			if(loginN==1) {
@@ -885,7 +806,7 @@ public class Salary {
 			}else if(loginN==2) {
 				iidd.loginUser();				
 			}else if(loginN==0) {
-				System.out.println("ì‹œìŠ¤í…œì„ ì¢…ë£Œí•©ë‹ˆë‹¤");
+				System.out.println("½Ã½ºÅÛÀ» Á¾·áÇÕ´Ï´Ù");
 				break;
 			}			
 		}
