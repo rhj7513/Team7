@@ -93,11 +93,11 @@ public class FEmployeeInfo {
 	public void setCall(int call) {
 		this.person.setCall(call);
 	}
-	public void setAddress(int address) {
-		this.person.setCall(address);
+	public void setAddress(String address) {
+		this.person.setAddress(address);
 	}
 	public void setAccountNum(int accountnum) {
-		this.person.setCall(accountnum);
+		this.person.setAccountNum(accountnum);
 	}
 	public void setPassword(String password) {
 		this.person.setPassword(password);
