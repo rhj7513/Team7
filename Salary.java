@@ -1,8 +1,4 @@
-package main1;
-
 import java.util.*;
-import java.time.LocalDate;import java.time.ZoneId;
-
 
 public class Salary {
 	private int id;//사번 개인정보 확인 할 때
@@ -219,6 +215,7 @@ public class Salary {
 		fei[fpos].setDepartment(department);
 		fei[fpos].setYear(year);
 		fei[fpos].setSalary(salary);
+		fei[fpos].setRealSalary(salary,fei[fpos].getEmployeeNum(),fei[fpos].getPosition());
 		fei[fpos].setName(name);
 		fei[fpos].setBirthday(birthday);
 		fei[fpos].setCall(call);
@@ -234,6 +231,7 @@ public class Salary {
 		pei[ppos].setEmployeeNum(employeeNum);
 		pei[ppos].setDepartment(department);
 		pei[ppos].setSalary(salary);
+		pei[ppos].setRealSalary(salary,pei[ppos].getEmployeeNum(),"");
 		pei[ppos].setName(name);
 		pei[ppos].setBirthday(birthday);
 		pei[ppos].setCall(call);
@@ -299,13 +297,14 @@ public class Salary {
 			System.out.print("비밀번호를 입력해주세요 :");
 			password = sc.next();
 			//sl.setFEmployeeInfo(employeenum, position, department, year, salary, name, birthday, call, address, accountNum, password);
-			for(int i=0;i<fei.length;i++) {
-				if(fei[i].getEmployeeNum()==null) {
-					setFEmployeeInfo(employeenum, position, department, year, salary, name, birthday, call, address, accountNum, password);
-					//fei[i].setEmployeeNum(employeenum);
-					break;
-				}
-			}
+//			for(int i=0;i<fei.length;i++) {
+//				if(fei[i].getEmployeeNum().equals(null)) {
+//					setFEmployeeInfo(employeenum, position, department, year, salary, name, birthday, call, address, accountNum, password);
+//					//fei[i].setEmployeeNum(employeenum);
+//					break;
+//				}
+//			}
+			setFEmployeeInfo(employeenum, position, department, year, salary, name, birthday, call, address, accountNum, password);
 			
 		}else if (workerType.equals("P")||workerType.equals("p")) { //비정규직 (사원번호, 급여, 부서, 개인정보)
 			System.out.print("번호를 입력해주세요 : ");
@@ -347,7 +346,8 @@ public class Salary {
 				System.out.println("변경할 사원의 사원번호를 입력하시오");
 				String eNum=sc.next();
 				if(eNum.charAt(0)=='F') {					
-					for(int i=0;i<fei.length;i++) {
+					for(int i=0;i<fpos;i++) {
+						System.out.println("dsadasdsadasdasdasdsad");
 						if(fei[i].getEmployeeNum().equals(eNum)) {
 							System.out.println("사원번호: "+fei[i].getEmployeeNum());
 							System.out.println("수정할 정보를 선택하시오");
@@ -408,12 +408,16 @@ public class Salary {
 								System.out.println("종료");
 								break;
 							}
-						}else {
+						} else if(fei[i].getEmployeeNum().equals(""))
+						{
+							System.out.println("ddd");
+						}
+						else {
 							System.out.println("err");
 						}
 					}				
 				}else if(eNum.charAt(0)=='P') {//비정규직
-					for(int i=0;i<pei.length;i++) {
+					for(int i=0;i<ppos;i++) {
 						if(pei[i].getEmployeeNum().equals(eNum)) {
 							System.out.println("사원번호: "+pei[i].getEmployeeNum());
 							System.out.println("수정할 정보를 선택하시오");
@@ -526,11 +530,11 @@ public class Salary {
 						System.out.println(pei[id].getAddress()+"으로 변경완료");
 					}else if(n==5) {
 						System.out.println("계좌번호를 변경해주세요");
-						fei[id].setAccountNum(sc.nextInt());
+						pei[id].setAccountNum(sc.nextInt());
 						System.out.println(pei[id].getAccountNum()+"으로 변경완료");
 					}else if(n==6) {
 						System.out.println("비밀번호를 변경해주세요");
-						fei[id].setPassword(sc.next());
+						pei[id].setPassword(sc.next());
 						System.out.println(pei[id].getPassword()+"으로 변경완료");
 					}else if(n==0) {
 						System.out.println("개인정보수정 종료");
@@ -543,28 +547,45 @@ public class Salary {
 		System.out.println("삭제할 사원번호");
 		String eNum=sc.next();
 		if(eNum.charAt(0)=='F') {
-			for(int i=0;i<fei.length;i++) {
+			for(int i=0;i<fpos;i++) {
 				if(eNum.equals(fei[i].getEmployeeNum())) {
 					System.out.print("이름: "+fei[i].getName()+"\t");
 					System.out.println("직책: "+fei[i].getPosition()+"의  사원정보를 삭제하시는게 맞습니까?");
 					System.out.println("1.예(삭제) 2. 취소");
 					int dN=sc.nextInt();
 					if(dN==1) {
-						fei[i].setEmployeeNum(null); //필요없을수도? 
+//						for(int j=0;j<fpos;j++) {
+//							if(fei[j].getEmployeeNum()==null) {
+//								fei[j]
+//							}
+//						}
+//						for(int i=0;i<fei.length;i++) {
+//							if(fei[i].getEmployeeNum()==null) {
+//								setFEmployeeInfo(employeenum, position, department, year, salary, name, birthday, call, address, accountNum, password);
+//								//fei[i].setEmployeeNum(employeenum);
+//								break;S
+//							}
+//						}
+						fei[i].setEmployeeNum(null); //필요없을수도?
+						
+						//fei[i]=null;
+						//fpos=fpos-1;
+						
 					}else {
 						break;
 					}					
 				}
 			}
 		}else if(eNum.charAt(0)=='P') {
-			for(int i=0;i<pei.length;i++) {
+			for(int i=0;i<ppos;i++) {
 				if(eNum.equals(pei[i].getEmployeeNum())) {
 					System.out.print("이름: "+pei[i].getName()+"\t");
 					System.out.println("부서: "+pei[i].getDepartment()+"의  사원정보를 삭제하시는게 맞습니까?");
 					System.out.println("1.예(삭제) 2. 취소");
 					int dN=sc.nextInt();
 					if(dN==1) {
-						pei[i].setEmployeeNum(null); //필요없을수도? 						
+						pei[i].setEmployeeNum(null); //필요없을수도? 	
+						ppos=ppos-1;
 					}else {
 						break;
 					}					
@@ -591,7 +612,7 @@ public class Salary {
 	               
 	               System.out.println("========================================"+name+"출력========================================");
 	               System.out.println("<정규직>");
-	               System.out.println("사원번호\t이름\t직책\t부서\t입사년도\t실급여\t생년월일\t전화번호\t주소\t계좌번호\t비밀번호\t");
+	               System.out.println("사원번호\t이름\t직책\t부서\t입사년도\t실급여\t생년월일\t전화번호\t\t주소\t계좌번호\t\t비밀번호");
 	               for(int i=0; i<fpos; i++) //정규직 출력
 	               {
 	                  if(fei[i].getName().equals(name)) //null값이 아니면 출력
@@ -601,7 +622,7 @@ public class Salary {
 	                  }
 	               }
 	               System.out.println("<비정규직>");
-	               System.out.println("사원번호\t이름\t부서\t실급여\t생년월일\t전화번호\t주소\t계좌번호\t비밀번호\t");
+	               System.out.println("사원번호\t이름\t부서\t실급여\t생년월일\t전화번호\t\t주소\t계좌번호\t\t비밀번호");
 	               for(int i=0; i<ppos; i++) //비정규직 출력
 	               {
 	                  if(pei[i].getName().equals(name)) //null값이 아니면 출력
@@ -618,7 +639,7 @@ public class Salary {
 	               
 	               System.out.println("========================================"+pos+"출력========================================");
 	               System.out.println("<정규직>");
-	               System.out.println("사원번호\t이름\t직책\t부서\t입사년도\t실급여\t생년월일\t전화번호\t주소\t계좌번호\t비밀번호\t");
+	               System.out.println("사원번호\t이름\t직책\t부서\t입사년도\t실급여\t생년월일\t전화번호\t\t주소\t계좌번호\t\t비밀번호");
 	               for(int i=0; i<fpos; i++) //정규직 출력
 	               {
 	                  if(fei[i].getPosition().equals(pos)) //null값이 아니면 출력
@@ -635,7 +656,7 @@ public class Salary {
 	               
 	               System.out.println("========================================"+dep+"출력========================================");
 	               System.out.println("<정규직>");
-	               System.out.println("사원번호\t이름\t직책\t부서\t입사년도\t실급여\t생년월일\t전화번호\t주소\t계좌번호\t비밀번호\t");
+	               System.out.println("사원번호\t이름\t직책\t부서\t입사년도\t실급여\t생년월일\t전화번호\t\t주소\t계좌번호\t\t비밀번호");
 	               for(int i=0; i<fpos; i++) //정규직 출력
 	               {
 	                  if(fei[i].getDepartment().equals(dep)) //null값이 아니면 출력
@@ -645,7 +666,7 @@ public class Salary {
 	                  }
 	               }
 	               System.out.println("<비정규직>");
-	               System.out.println("사원번호\t이름\t부서\t실급여\t생년월일\t전화번호\t주소\t계좌번호\t비밀번호\t");
+	               System.out.println("사원번호\t이름\t부서\t실급여\t생년월일\t전화번호\t\t주소\t계좌번호\t\t비밀번호");
 	               for(int i=0; i<ppos; i++) //비정규직 출력
 	               {
 	                  if(pei[i].getDepartment().equals(dep)) //null값이 아니면 출력
@@ -751,8 +772,8 @@ public class Salary {
 	            case 1: //1. 전체 출력
 	               System.out.println("========================================전체 출력========================================");
 	               System.out.println("<정규직>");
-	               System.out.println("사원번호\t이름\t직책\t부서\t입사년도\t실급여\t생년월일\t전화번호\t주소\t계좌번호\t비밀번호\t");
-	               for(int i=0; i<fei.length; i++) //정규직 출력
+	               System.out.println("사원번호\t이름\t직책\t부서\t입사년도\t실급여\t생년월일\t전화번호\t\t주소\t계좌번호\t\t비밀번호");
+	               for(int i=0; i<fpos; i++) //정규직 출력
 	               {
 	                  if(fei[i].getEmployeeNum()!=null) //null값이 아니면 출력
 	                  {
@@ -761,8 +782,8 @@ public class Salary {
 	                  }
 	               }
 	               System.out.println("<비정규직>");
-	               System.out.println("사원번호\t이름\t부서\t실급여\t생년월일\t전화번호\t주소\t계좌번호\t비밀번호\t");
-	               for(int i=0; i<pei.length; i++) //비정규직 출력
+	               System.out.println("사원번호\t이름\t부서\t실급여\t생년월일\t전화번호\t\t주소\t계좌번호\t\t비밀번호");
+	               for(int i=0; i<ppos; i++) //비정규직 출력
 	               {
 	                  if(pei[i].getEmployeeNum()!=null) //null값이 아니면 출력
 	                  {
@@ -775,7 +796,7 @@ public class Salary {
 	               
 	            case 2: //2. 정규직 전체 출력
 	               System.out.println("========================================정규직 출력========================================");
-	               System.out.println("사원번호\t이름\t직책\t부서\t입사년도\t실급여\t생년월일\t전화번호\t주소\t계좌번호\t비밀번호\t");
+	               System.out.println("사원번호\t이름\t직책\t부서\t입사년도\t실급여\t생년월일\t전화번호\t\t주소\t계좌번호\t\t비밀번호");
 	               for(int i=0; i<fei.length; i++) //정규직 출력
 	               {
 	                  if(fei[i].getEmployeeNum()!=null) //null값이 아니면 출력
@@ -788,7 +809,7 @@ public class Salary {
 	               break;
 	            case 3: //3. 비정규직 전체 출력
 	               System.out.println("========================================비정규직 출력========================================");
-	               System.out.println("사원번호\t이름\t부서\t실급여\t생년월일\t전화번호\t주소\t계좌번호\t비밀번호\t");
+	               System.out.println("사원번호\t이름\t부서\t실급여\t생년월일\t전화번호\t\t주소\t계좌번호\t\t비밀번호");
 	               for(int i=0; i<pei.length; i++) //비정규직 출력
 	               {
 	                  if(pei[i].getEmployeeNum()!=null) //null값이 아니면 출력
@@ -804,13 +825,13 @@ public class Salary {
 	      }
 	      else if(typei.equals("F"))
 	      {   
-	         System.out.println("사원번호\t이름\t직책\t부서\t입사년도\t실급여\t생년월일\t전화번호\t주소\t계좌번호\t비밀번호\t");
+	    	  System.out.println("사원번호\t이름\t직책\t부서\t입사년도\t실급여\t생년월일\t전화번호\t\t주소\t계좌번호\t\t비밀번호");
 	         System.out.println(fei[id].getEmployeeNum()+"\t"+fei[id].getName()+"\t"+fei[id].getPosition()+"\t"+fei[id].getDepartment()+"\t"+fei[id].getYear()+"\t"+fei[id].getRealSalary()+"\t"+
 	               fei[id].getBirthday()+"\t"+fei[id].getCall()+"\t"+fei[id].getAddress()+"\t"+fei[id].getAccountNum()+"\t"+fei[id].getPassword());
 	      }
 	      else if(typei.equals("P"))
 	      {
-	         System.out.println("사원번호\t이름\t부서\t실급여\t생년월일\t전화번호\t주소\t계좌번호\t비밀번호\t");
+	    	  System.out.println("사원번호\t이름\t부서\t실급여\t생년월일\t전화번호\t\t주소\t계좌번호\t\t비밀번호");
 	         System.out.println(pei[id].getEmployeeNum()+"\t"+pei[id].getName()+"\t"+pei[id].getDepartment()+"\t"+pei[id].getRealSalary()+"\t"+
 	               pei[id].getBirthday()+"\t"+pei[id].getCall()+"\t"+pei[id].getAddress()+"\t"+pei[id].getAccountNum()+"\t"+pei[id].getPassword());
 	      }
