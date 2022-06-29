@@ -83,6 +83,7 @@ public class FEmployeeInfo {
 		this.salary = s;
 	}
 	
+	
 	public void setName(String name) {
 		this.person.setName(name);
 	}
@@ -91,6 +92,15 @@ public class FEmployeeInfo {
 	}
 	public void setCall(int call) {
 		this.person.setCall(call);
+	}
+	public void setAddress(int address) {
+		this.person.setCall(address);
+	}
+	public void setAccountNum(int accountnum) {
+		this.person.setCall(accountnum);
+	}
+	public void setPassword(String password) {
+		this.person.setPassword(password);
 	}
 	
 	
