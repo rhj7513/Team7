@@ -1,7 +1,7 @@
 
 public class PEmployeeInfo {
-	private PersonInfo[]person;
-	//private SalaryOp[]salaryop; -> SalaryOp class생성 후 추가
+	private PersonInfo person;
+	//private SalaryOp salaryop; -> SalaryOp class생성 후 추가
 
 	//필드
 	private String employeeNum;
