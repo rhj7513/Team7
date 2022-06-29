@@ -1,6 +1,6 @@
 
 public class FEmployeeInfo {
-	private PersonInfo[]person;
+	private PersonInfo name;
 	//private SalaryOp[]salaryop; -> SalaryOp class생성 후 추가
 	//필드
 	private String employeeNum;
