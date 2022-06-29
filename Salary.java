@@ -57,23 +57,19 @@ public class Salary {
 	
 	private FEmployeeInfo[] fei; //정규직 클래스
 	private PEmployeeInfo[] pei; //비정규직 클래스
-	private PersonInfo[] fpi;//정규직 사원의 개인정보 배열
-	private PersonInfo[] ppi;//비정규직 사원의 개인정보 배열
 	private int fpos;//정규직 클래스 배열 index
 	private int ppos;//비정규직 클래스 배열 index
-	private int finfpos;//정규직 개인정보 클래스
-	private int pinfpos;//비정규직 개인정보 클래스
-
 	//생성자
 	public Salary() {
 		fpos=0;
 		fei = new FEmployeeInfo[50];
-		//pei = new PEmployeeInfo[50];
+		pei = new PEmployeeInfo[50];
+		
 		for (int i=0; i<fei.length; i++) {
-			if (fei[i]==null){
-				fei[i] = new FEmployeeInfo();
-			}
-			else if (pei[i]==null) {
+			
+			fei[i] = new FEmployeeInfo();
+			
+			if (pei[i]==null) {
 				pei[i] = new PEmployeeInfo();
 			}
 		}
@@ -100,12 +96,17 @@ public class Salary {
 	}
 	
 	//비정규직 (사원번호, 급여, 부서)
-	public void setPEmployeeInfo(String employeeNum, String department, int salary
-			) {
+	public void setPEmployeeInfo(String employeeNum, String department, int salary,
+			String name, int birthday, int call, String address, int accountNum, String password) {
 		pei[ppos].setEmployeeNum(employeeNum);
 		pei[ppos].setDepartment(department);
 		pei[ppos].setSalary(salary);
-		
+		pei[ppos].setName(name);
+		pei[ppos].setBirthday(birthday);
+		pei[ppos].setCall(call);
+		pei[ppos].setAddress(address);
+		pei[ppos].setAccountNum(accountNum);
+		pei[ppos].setPassword(password);
 		ppos++;
 	}
 	
@@ -133,11 +134,10 @@ public class Salary {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		
 		System.out.print("정규직(F) / 비정규직(P)인가요? : ");
 		workerType = sc.next();
 		
-		if (workerType.equals("F")) {//정규직 (사원번호, 직책, 부서, 입사년도, 급여, 개인정보)
+		if (workerType.equals("F")||workerType.equals("f")) {//정규직 (사원번호, 직책, 부서, 입사년도, 급여, 개인정보)
 			System.out.print("번호를 입력해주세요 : ");
 			empnum = sc.nextInt();
 			employeenum = workerType+empnum;
@@ -150,9 +150,6 @@ public class Salary {
 			year = sc.nextInt();
 			System.out.print("급여를 입력해주세요 : ");
 			salary = sc.nextInt();
-			System.out.println("-------------------");
-			//set
-			
 			
 			
 			//개인정보 입력 (처음에는 그냥 넣음)
@@ -171,7 +168,7 @@ public class Salary {
 			sl.setFEmployeeInfo(employeenum, position, department, year, salary, name, birthday, call, address, accountNum, password);
 			
 			
-		}else if (workerType.equals("P")) { //비정규직 (사원번호, 급여, 부서, 개인정보)
+		}else if (workerType.equals("P")||workerType.equals("p")) { //비정규직 (사원번호, 급여, 부서, 개인정보)
 			System.out.print("번호를 입력해주세요 : ");
 			empnum = sc.nextInt();
 			employeenum = workerType+empnum;
@@ -181,10 +178,7 @@ public class Salary {
 			department = sc.next();
 			System.out.print("급여를 입력해주세요 : ");
 			salary = sc.nextInt();
-			//set
-			
-			
-			
+
 			
 			//개인정보 입력 (처음에는 그냥 넣음)
 			System.out.print("이름을 입력해주세요 :");
@@ -200,7 +194,7 @@ public class Salary {
 			System.out.print("비밀번호를 입력해주세요 :");
 			password = sc.next();
 			//set
-			sl.setPEmployeeInfo(employeenum, department, salary);
+			sl.setPEmployeeInfo(employeenum, department, salary, name, birthday, call, address, accountNum, password);
 			
 		}else {
 			System.out.println("잘못 입력했습니다.");
@@ -209,12 +203,18 @@ public class Salary {
 		}
 	}
 	
+	
 	public void disp() {
-		for (int i=0; i<fpos; i++) {
+		System.out.println("------출력---------");
+		for (int i=0; i<50; i++) {
 			System.out.print("이름 : "+fei[i].getEmployeeNum());
+			System.out.print("부서 : "+fei[i].getDepartment());
 		}
 		
+		
+		
 	}
+	
 	
 	public static void main (String[] args) {
 		Salary sl = new Salary();
