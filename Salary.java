@@ -31,6 +31,21 @@ public class Salary {
 		}
 	}
 	
+	public Salary(int f, int p) {
+        fpos=0;
+        ppos=0;
+        
+        fei = new FEmployeeInfo[f];
+        pei = new PEmployeeInfo[p];
+        
+        for (int i=0; i<fei.length; i++) {            
+           fei[i] = new FEmployeeInfo();
+        }
+        for(int i=0;i<pei.length;i++) {
+           pei[i]=new PEmployeeInfo();
+        }
+	}
+	
 	public void loginAdmin() {
 		Scanner sc=  new Scanner(System.in);
 		
@@ -41,6 +56,8 @@ public class Salary {
 		id = sc.next();
 		System.out.print("비밀번호를 입력해주세요 : ");
 		pw = sc.next();
+		
+		
 		
 		if (id.equals("admin")) {
 			if (pw.equals("admin")) {
@@ -796,8 +813,16 @@ public class Salary {
 	public static void main(String[] args) {	
 		
 		Scanner sc= new Scanner(System.in);
-		Salary iidd = new Salary(50);
+		//Salary iidd = new Salary(50);
 		System.out.println("첫실행입니다 관리자로그인부터 해주십쇼");
+		
+		System.out.println("정규직 인원수를 입력하시오: ");
+	    int pop=sc.nextInt();
+	    System.out.println("비정규직인원수를 입력하시오: ");
+	    int pop2=sc.nextInt();
+	      
+	    Salary iidd=new Salary(pop,pop2);
+	    
 		for(;;) {
 			System.out.println("1. 관리자 로그인 2. 사용자 로그인 0. 시스템종료");
 			int loginN=sc.nextInt();
